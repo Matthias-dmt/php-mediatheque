@@ -39,6 +39,9 @@
 /app/phpunit.xml
 /phpunit.xml
 
+/composer.json
+/composer.lock
+
 # Build data
 /build/
 
