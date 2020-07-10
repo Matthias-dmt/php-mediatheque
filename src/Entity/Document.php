@@ -29,6 +29,21 @@ class Document
      */
     private $authorId;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cote;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $format;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $codeOeuvre;
+
     public function __construct()
     {
         $this->authorId = new ArrayCollection();
@@ -73,6 +88,42 @@ class Document
         if ($this->authorId->contains($authorId)) {
             $this->authorId->removeElement($authorId);
         }
+
+        return $this;
+    }
+
+    public function getCote(): ?string
+    {
+        return $this->cote;
+    }
+
+    public function setCote(string $cote): self
+    {
+        $this->cote = $cote;
+
+        return $this;
+    }
+
+    public function getFormat(): ?string
+    {
+        return $this->format;
+    }
+
+    public function setFormat(string $format): self
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+    public function getCodeOeuvre(): ?string
+    {
+        return $this->codeOeuvre;
+    }
+
+    public function setCodeOeuvre(string $codeOeuvre): self
+    {
+        $this->codeOeuvre = $codeOeuvre;
 
         return $this;
     }
