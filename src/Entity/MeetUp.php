@@ -22,6 +22,12 @@ class MeetUp
      */
     private $date;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Author::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $guest;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +41,18 @@ class MeetUp
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getGuest(): ?Author
+    {
+        return $this->guest;
+    }
+
+    public function setGuest(Author $guest): self
+    {
+        $this->guest = $guest;
 
         return $this;
     }
