@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=DocumentRepository::class)
+ * @InheritanceType("SINGLE_TABLE")
+ * @DiscriminatorColumn(name="discr", type="string")
+ * @DiscriminatorMap({"document" = "Document", "book" = "Book", "cd" = "CD", "dvd" = "DVD", "ebook" = "EBook", "journal" = "Journal"})
  */
 class Document
 {
@@ -62,32 +65,6 @@ class Document
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Author[]
-     */
-    public function getAuthorId(): Collection
-    {
-        return $this->authorId;
-    }
-
-    public function addAuthorId(Author $authorId): self
-    {
-        if (!$this->authorId->contains($authorId)) {
-            $this->authorId[] = $authorId;
-        }
-
-        return $this;
-    }
-
-    public function removeAuthorId(Author $authorId): self
-    {
-        if ($this->authorId->contains($authorId)) {
-            $this->authorId->removeElement($authorId);
-        }
 
         return $this;
     }

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=DVDRepository::class)
  */
-class DVD
+class DVD extends Document
 {
     /**
      * @ORM\Id()

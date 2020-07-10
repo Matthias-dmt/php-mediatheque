@@ -73,32 +73,4 @@ class Author
 
         return $this;
     }
-
-    /**
-     * @return Collection|Document[]
-     */
-    public function getDocumentId(): Collection
-    {
-        return $this->documentId;
-    }
-
-    public function addDocumentId(Document $documentId): self
-    {
-        if (!$this->documentId->contains($documentId)) {
-            $this->documentId[] = $documentId;
-            $documentId->addAuthorId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDocumentId(Document $documentId): self
-    {
-        if ($this->documentId->contains($documentId)) {
-            $this->documentId->removeElement($documentId);
-            $documentId->removeAuthorId($this);
-        }
-
-        return $this;
-    }
 }

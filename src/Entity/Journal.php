@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=JournalRepository::class)
  */
-class Journal
+class Journal extends Document
 {
     /**
      * @ORM\Id()
