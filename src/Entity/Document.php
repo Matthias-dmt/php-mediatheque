@@ -9,9 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=DocumentRepository::class)
- * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="discr", type="string")
- * @DiscriminatorMap({"document" = "Document", "book" = "Book", "cd" = "CD", "dvd" = "DVD", "ebook" = "EBook", "journal" = "Journal"})
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({"document" = "Document", "book" = "Book", "cd" = "CD", "dvd" = "DVD", "ebook" = "EBook", "journal" = "Journal"})
  */
 class Document
 {
