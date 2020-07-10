@@ -28,6 +28,12 @@ class MeetUp
      */
     private $employee;
 
+    /** 
+     * @ORM\OneToOne(targetEntity=Author::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $guest;
+
     public function getId(): ?int
     {
         return $this->id;
