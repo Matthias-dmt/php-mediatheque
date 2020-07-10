@@ -47,10 +47,16 @@ class Document
      */
     private $maintenances;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Borrowing::class, mappedBy="document")
+     */
+    private $borrowings;
+
     public function __construct()
     {
         $this->author = new ArrayCollection();
         $this->maintenances = new ArrayCollection();
+        $this->borrowings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,6 +137,37 @@ class Document
             // set the owning side to null (unless already changed)
             if ($maintenance->getDocument() === $this) {
                 $maintenance->setDocument(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Borrowing[]
+     */
+    public function getBorrowings(): Collection
+    {
+        return $this->borrowings;
+    }
+
+    public function addBorrowing(Borrowing $borrowing): self
+    {
+        if (!$this->borrowings->contains($borrowing)) {
+            $this->borrowings[] = $borrowing;
+            $borrowing->setDocument($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBorrowing(Borrowing $borrowing): self
+    {
+        if ($this->borrowings->contains($borrowing)) {
+            $this->borrowings->removeElement($borrowing);
+            // set the owning side to null (unless already changed)
+            if ($borrowing->getDocument() === $this) {
+                $borrowing->setDocument(null);
             }
         }
 
