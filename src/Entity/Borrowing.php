@@ -38,6 +38,11 @@ class Borrowing
      */
     private $borrower;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Document::class, inversedBy="borrowings")
+     */
+    private $document;
+
   
 
     public function getId(): ?int
@@ -89,6 +94,18 @@ class Borrowing
     public function setBorrower(?Member $borrower): self
     {
         $this->borrower = $borrower;
+
+        return $this;
+    }
+
+    public function getDocument(): ?Document
+    {
+        return $this->document;
+    }
+
+    public function setDocument(?Document $document): self
+    {
+        $this->document = $document;
 
         return $this;
     }
