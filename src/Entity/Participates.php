@@ -32,7 +32,7 @@ class Participates
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="participates")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $person;
+    private $user;
 
 
     public function getId(): ?int
@@ -64,14 +64,14 @@ class Participates
         return $this;
     }
 
-    public function getPerson(): ?User
+    public function getUser(): ?User
     {
-        return $this->person;
+        return $this->user;
     }
 
-    public function setPerson(?User $person): self
+    public function setUser(?User $user): self
     {
-        $this->person = $person;
+        $this->user = $user;
 
         return $this;
     }

@@ -32,7 +32,7 @@ class MeetUp
      * @ORM\OneToOne(targetEntity=Author::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $guest;
+    private $author;
 
    
 
@@ -65,14 +65,14 @@ class MeetUp
         return $this;
     }
 
-    public function getGuest(): ?Author
+    public function getAuthor(): ?Author
     {
-        return $this->guest;
+        return $this->author;
     }
 
-    public function setGuest(Author $guest): self
+    public function setAuthor(Author $author): self
     {
-        $this->guest = $guest;
+        $this->author = $author;
 
         return $this;
     }

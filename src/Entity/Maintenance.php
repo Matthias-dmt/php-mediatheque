@@ -31,7 +31,7 @@ class Maintenance
      * @ORM\ManyToOne(targetEntity=Employee::class, inversedBy="maintenances")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $maintainer;
+    private $employee;
 
     /**
      * @ORM\ManyToOne(targetEntity=Document::class, inversedBy="maintenances")
@@ -68,14 +68,14 @@ class Maintenance
         return $this;
     }
 
-    public function getMaintainer(): ?Employee
+    public function getEmployee(): ?Employee
     {
-        return $this->maintainer;
+        return $this->employee;
     }
 
-    public function setMaintainer(?Employee $maintainer): self
+    public function setMaintainer(?Employee $employee): self
     {
-        $this->maintainer = $maintainer;
+        $this->employee = $employee;
 
         return $this;
     }

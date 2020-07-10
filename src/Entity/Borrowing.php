@@ -36,7 +36,7 @@ class Borrowing
      * @ORM\ManyToOne(targetEntity=Member::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $borrower;
+    private $member;
 
     /**
      * @ORM\ManyToOne(targetEntity=Document::class, inversedBy="borrowings")
@@ -86,14 +86,14 @@ class Borrowing
         return $this;
     }
 
-    public function getBorrower(): ?Member
+    public function getMember(): ?Member
     {
-        return $this->borrower;
+        return $this->member;
     }
 
-    public function setBorrower(?Member $borrower): self
+    public function setMember(?Member $member): self
     {
-        $this->borrower = $borrower;
+        $this->member = $member;
 
         return $this;
     }
