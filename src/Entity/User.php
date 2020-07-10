@@ -117,7 +117,7 @@ class User
     {
         if (!$this->participates->contains($participate)) {
             $this->participates[] = $participate;
-            $participate->setPerson($this);
+            $participate->setUser($this);
         }
 
         return $this;
@@ -128,8 +128,8 @@ class User
         if ($this->participates->contains($participate)) {
             $this->participates->removeElement($participate);
             // set the owning side to null (unless already changed)
-            if ($participate->getPerson() === $this) {
-                $participate->setPerson(null);
+            if ($participate->getUser() === $this) {
+                $participate->getUser(null);
             }
         }
 

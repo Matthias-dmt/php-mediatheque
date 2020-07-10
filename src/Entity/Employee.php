@@ -55,7 +55,7 @@ class Employee extends User
     {
         if (!$this->maintenances->contains($maintenance)) {
             $this->maintenances[] = $maintenance;
-            $maintenance->setMaintainer($this);
+            $maintenance->setEmployee($this);
         }
 
         return $this;
@@ -66,8 +66,8 @@ class Employee extends User
         if ($this->maintenances->contains($maintenance)) {
             $this->maintenances->removeElement($maintenance);
             // set the owning side to null (unless already changed)
-            if ($maintenance->getMaintainer() === $this) {
-                $maintenance->setMaintainer(null);
+            if ($maintenance->getEmployee() === $this) {
+                $maintenance->setEmployee(null);
             }
         }
 

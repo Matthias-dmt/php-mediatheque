@@ -73,7 +73,7 @@ class Maintenance
         return $this->employee;
     }
 
-    public function setMaintainer(?Employee $employee): self
+    public function setEmployee(?Employee $employee): self
     {
         $this->employee = $employee;
 
