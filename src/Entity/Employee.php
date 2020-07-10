@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=EmployeeRepository::class)
  */
-class Employee
+class Employee extends User
 {
     /**
      * @ORM\Id()

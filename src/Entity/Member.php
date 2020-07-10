@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=MemberRepository::class)
  */
-class Member
+class Member extends User
 {
     /**
      * @ORM\Id()
