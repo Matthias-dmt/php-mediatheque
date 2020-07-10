@@ -28,6 +28,13 @@ class Participates
      */
     private $meetUp;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="participates")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $person;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,6 +60,18 @@ class Participates
     public function setMeetUp(?MeetUp $meetUp): self
     {
         $this->meetUp = $meetUp;
+
+        return $this;
+    }
+
+    public function getPerson(): ?User
+    {
+        return $this->person;
+    }
+
+    public function setPerson(?User $person): self
+    {
+        $this->person = $person;
 
         return $this;
     }
