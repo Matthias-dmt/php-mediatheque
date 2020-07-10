@@ -61,4 +61,4 @@
 
 # Migration
 
-/migration/*
+/src/Migrations/*
