@@ -27,13 +27,13 @@ class IsInvolvedIn
      * @ORM\ManyToOne(targetEntity=Document::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $documentId;
+    private $document;
 
     /**
      * @ORM\ManyToOne(targetEntity=Author::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $authorId;
+    private $author;
 
     public function getId(): ?int
     {
@@ -52,26 +52,26 @@ class IsInvolvedIn
         return $this;
     }
 
-    public function getDocumentId(): ?Document
+    public function getDocument(): ?Document
     {
-        return $this->documentId;
+        return $this->document;
     }
 
-    public function setDocumentId(?Document $documentId): self
+    public function setDocument(?Document $document): self
     {
-        $this->documentId = $documentId;
+        $this->document = $document;
 
         return $this;
     }
 
-    public function getAuthorId(): ?Author
+    public function getAuthor(): ?Author
     {
-        return $this->authorId;
+        return $this->author;
     }
 
-    public function setAuthorId(?Author $authorId): self
+    public function setAuthor(?Author $author): self
     {
-        $this->authorId = $authorId;
+        $this->author = $author;
 
         return $this;
     }

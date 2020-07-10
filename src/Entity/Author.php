@@ -29,22 +29,6 @@ class Author
      */
     private $lastName;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Document::class, mappedBy="authorId")
-     */
-    private $authorId;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Document::class, mappedBy="authorId")
-     */
-    private $documentId;
-
-    public function __construct()
-    {
-        $this->authorId = new ArrayCollection();
-        $this->documentId = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;

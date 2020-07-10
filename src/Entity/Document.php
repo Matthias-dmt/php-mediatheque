@@ -28,11 +28,6 @@ class Document
     private $title;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Author::class, inversedBy="documentId")
-     */
-    private $authorId;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $cote;
@@ -54,7 +49,7 @@ class Document
 
     public function __construct()
     {
-        $this->authorId = new ArrayCollection();
+        $this->author = new ArrayCollection();
         $this->maintenances = new ArrayCollection();
     }
 
