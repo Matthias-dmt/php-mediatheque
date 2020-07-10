@@ -22,6 +22,12 @@ class Participates
      */
     private $places;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=MeetUp::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $meetUp;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +41,18 @@ class Participates
     public function setPlaces(?int $places): self
     {
         $this->places = $places;
+
+        return $this;
+    }
+
+    public function getMeetUp(): ?MeetUp
+    {
+        return $this->meetUp;
+    }
+
+    public function setMeetUp(?MeetUp $meetUp): self
+    {
+        $this->meetUp = $meetUp;
 
         return $this;
     }
