@@ -19,15 +19,16 @@ class Employee
      */
     private $id;
 
-    /**
-     * @ORM\OneToMany(targetEntity=MeetUp::class, mappedBy="employee")
-     */
-    private $organizes;
 
     /**
      * @ORM\OneToMany(targetEntity=Maintenance::class, mappedBy="maintainer")
      */
     private $maintenances;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MeetUp::class, mappedBy="employee", orphanRemoval=true)
+     */
+    private $organizes;
 
     public function __construct()
     {
@@ -38,6 +39,39 @@ class Employee
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    
+
+    /**
+     * @return Collection|Maintenance[]
+     */
+    public function getMaintenances(): Collection
+    {
+        return $this->maintenances;
+    }
+
+    public function addMaintenance(Maintenance $maintenance): self
+    {
+        if (!$this->maintenances->contains($maintenance)) {
+            $this->maintenances[] = $maintenance;
+            $maintenance->setMaintainer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaintenance(Maintenance $maintenance): self
+    {
+        if ($this->maintenances->contains($maintenance)) {
+            $this->maintenances->removeElement($maintenance);
+            // set the owning side to null (unless already changed)
+            if ($maintenance->getMaintainer() === $this) {
+                $maintenance->setMaintainer(null);
+            }
+        }
+
+        return $this;
     }
 
     /**
@@ -65,37 +99,6 @@ class Employee
             // set the owning side to null (unless already changed)
             if ($organize->getEmployee() === $this) {
                 $organize->setEmployee(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Maintenance[]
-     */
-    public function getMaintenances(): Collection
-    {
-        return $this->maintenances;
-    }
-
-    public function addMaintenance(Maintenance $maintenance): self
-    {
-        if (!$this->maintenances->contains($maintenance)) {
-            $this->maintenances[] = $maintenance;
-            $maintenance->setMaintainer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMaintenance(Maintenance $maintenance): self
-    {
-        if ($this->maintenances->contains($maintenance)) {
-            $this->maintenances->removeElement($maintenance);
-            // set the owning side to null (unless already changed)
-            if ($maintenance->getMaintainer() === $this) {
-                $maintenance->setMaintainer(null);
             }
         }
 
