@@ -47,9 +47,15 @@ class Document
      */
     private $codeOeuvre;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Maintenance::class, mappedBy="document")
+     */
+    private $maintenances;
+
     public function __construct()
     {
         $this->authorId = new ArrayCollection();
+        $this->maintenances = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,6 +107,37 @@ class Document
     public function setCodeOeuvre(string $codeOeuvre): self
     {
         $this->codeOeuvre = $codeOeuvre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Maintenance[]
+     */
+    public function getMaintenances(): Collection
+    {
+        return $this->maintenances;
+    }
+
+    public function addMaintenance(Maintenance $maintenance): self
+    {
+        if (!$this->maintenances->contains($maintenance)) {
+            $this->maintenances[] = $maintenance;
+            $maintenance->setDocument($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaintenance(Maintenance $maintenance): self
+    {
+        if ($this->maintenances->contains($maintenance)) {
+            $this->maintenances->removeElement($maintenance);
+            // set the owning side to null (unless already changed)
+            if ($maintenance->getDocument() === $this) {
+                $maintenance->setDocument(null);
+            }
+        }
 
         return $this;
     }

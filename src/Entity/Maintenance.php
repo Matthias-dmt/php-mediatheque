@@ -27,6 +27,18 @@ class Maintenance
      */
     private $maintenanceDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Employee::class, inversedBy="maintenances")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $maintainer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Document::class, inversedBy="maintenances")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $document;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +64,30 @@ class Maintenance
     public function setMaintenanceDate(\DateTimeInterface $maintenanceDate): self
     {
         $this->maintenanceDate = $maintenanceDate;
+
+        return $this;
+    }
+
+    public function getMaintainer(): ?Employee
+    {
+        return $this->maintainer;
+    }
+
+    public function setMaintainer(?Employee $maintainer): self
+    {
+        $this->maintainer = $maintainer;
+
+        return $this;
+    }
+
+    public function getDocument(): ?Document
+    {
+        return $this->document;
+    }
+
+    public function setDocument(?Document $document): self
+    {
+        $this->document = $document;
 
         return $this;
     }

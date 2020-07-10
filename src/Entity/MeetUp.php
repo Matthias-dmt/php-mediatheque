@@ -22,6 +22,12 @@ class MeetUp
      */
     private $date;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Employee::class, inversedBy="organizes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $employee;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +41,18 @@ class MeetUp
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getEmployee(): ?Employee
+    {
+        return $this->employee;
+    }
+
+    public function setEmployee(?Employee $employee): self
+    {
+        $this->employee = $employee;
 
         return $this;
     }
