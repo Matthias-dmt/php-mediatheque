@@ -32,6 +32,12 @@ class Borrowing
      */
     private $effectiveReturnDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Member::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $borrower;
+
   
 
     public function getId(): ?int
@@ -71,6 +77,18 @@ class Borrowing
     public function setEffectiveReturnDate(?\DateTimeInterface $effectiveReturnDate): self
     {
         $this->effectiveReturnDate = $effectiveReturnDate;
+
+        return $this;
+    }
+
+    public function getBorrower(): ?Member
+    {
+        return $this->borrower;
+    }
+
+    public function setBorrower(?Member $borrower): self
+    {
+        $this->borrower = $borrower;
 
         return $this;
     }
