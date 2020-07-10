@@ -18,15 +18,21 @@ class Borrowing
     private $id;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $startDate;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
-    private $endDate;
+    private $expectedReturnDate;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $effectiveReturnDate;
+
+  
 
     public function getId(): ?int
     {
@@ -45,15 +51,29 @@ class Borrowing
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getExpectedReturnDate(): ?\DateTimeInterface
     {
-        return $this->endDate;
+        return $this->expectedReturnDate;
     }
 
-    public function setEndDate(\DateTimeInterface $endDate): self
+    public function setExpectedReturnDate(\DateTimeInterface $expectedReturnDate): self
     {
-        $this->endDate = $endDate;
+        $this->expectedReturnDate = $expectedReturnDate;
 
         return $this;
     }
+
+    public function getEffectiveReturnDate(): ?\DateTimeInterface
+    {
+        return $this->effectiveReturnDate;
+    }
+
+    public function setEffectiveReturnDate(?\DateTimeInterface $effectiveReturnDate): self
+    {
+        $this->effectiveReturnDate = $effectiveReturnDate;
+
+        return $this;
+    }
+
+
 }

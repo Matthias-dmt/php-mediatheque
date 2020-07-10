@@ -17,10 +17,6 @@ class Member
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $memberNumber;
 
     /**
      * @ORM\Column(type="integer")
@@ -37,21 +33,14 @@ class Member
      */
     private $adress;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $membershipDate;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMemberNumber(): ?int
-    {
-        return $this->memberNumber;
-    }
-
-    public function setMemberNumber(int $memberNumber): self
-    {
-        $this->memberNumber = $memberNumber;
-
-        return $this;
     }
 
     public function getPostalCode(): ?int
@@ -86,6 +75,18 @@ class Member
     public function setAdress(string $adress): self
     {
         $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getMembershipDate(): ?\DateTimeInterface
+    {
+        return $this->membershipDate;
+    }
+
+    public function setMembershipDate(\DateTimeInterface $membershipDate): self
+    {
+        $this->membershipDate = $membershipDate;
 
         return $this;
     }
