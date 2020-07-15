@@ -19,18 +19,18 @@
             </tr>
         </thead>
         <tbody>
-        {% for c_d in c_ds %}
+        {% for cd in cds %}
             <tr>
-                <td>{{ c_d.id }}</td>
-                <td>{{ c_d.title }}</td>
-                <td>{{ c_d.cote }}</td>
-                <td>{{ c_d.format }}</td>
-                <td>{{ c_d.codeOeuvre }}</td>
-                <td>{{ c_d.plages }}</td>
-                <td>{{ c_d.duration ? c_d.duration|date('H:i:s') : '' }}</td>
+                <td>{{ cd.id }}</td>
+                <td>{{ cd.title }}</td>
+                <td>{{ cd.cote }}</td>
+                <td>{{ cd.format }}</td>
+                <td>{{ cd.codeOeuvre }}</td>
+                <td>{{ cd.plages }}</td>
+                <td>{{ cd.duration ? cd.duration|date('H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('c_d_show', {'id': c_d.id}) }}">show</a>
-                    <a href="{{ path('c_d_edit', {'id': c_d.id}) }}">edit</a>
+                    <a href="{{ path('cd_show', {'id': cd.id}) }}">show</a>
+                    <a href="{{ path('cd_edit', {'id': cd.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -41,5 +41,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('c_d_new') }}">Create new</a>
+    <a href="{{ path('cd_new') }}">Create new</a>
 {% endblock %}

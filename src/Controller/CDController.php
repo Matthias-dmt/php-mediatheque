@@ -11,22 +11,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/c/d")
+ * @Route("/cd")
  */
 class CDController extends AbstractController
 {
     /**
-     * @Route("/", name="c_d_index", methods={"GET"})
+     * @Route("/", name="cd_index", methods={"GET"})
      */
     public function index(CDRepository $cDRepository): Response
     {
         return $this->render('cd/index.html.twig', [
-            'c_ds' => $cDRepository->findAll(),
+            'cds' => $cDRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="c_d_new", methods={"GET","POST"})
+     * @Route("/new", name="cd_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -39,27 +39,27 @@ class CDController extends AbstractController
             $entityManager->persist($cD);
             $entityManager->flush();
 
-            return $this->redirectToRoute('c_d_index');
+            return $this->redirectToRoute('cd_index');
         }
 
         return $this->render('cd/new.html.twig', [
-            'c_d' => $cD,
+            'cd' => $cD,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="c_d_show", methods={"GET"})
+     * @Route("/{id}", name="cd_show", methods={"GET"})
      */
     public function show(CD $cD): Response
     {
         return $this->render('cd/show.html.twig', [
-            'c_d' => $cD,
+            'cd' => $cD,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="c_d_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="cd_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, CD $cD): Response
     {
@@ -69,17 +69,17 @@ class CDController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('c_d_index');
+            return $this->redirectToRoute('cd_index');
         }
 
         return $this->render('cd/edit.html.twig', [
-            'c_d' => $cD,
+            'cd' => $cD,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="c_d_delete", methods={"DELETE"})
+     * @Route("/{id}", name="cd_delete", methods={"DELETE"})
      */
     public function delete(Request $request, CD $cD): Response
     {
@@ -89,6 +89,6 @@ class CDController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('c_d_index');
+        return $this->redirectToRoute('cd_index');
     }
 }

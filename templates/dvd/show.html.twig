@@ -9,34 +9,34 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ d_v_d.id }}</td>
+                <td>{{ dvd.id }}</td>
             </tr>
             <tr>
                 <th>Title</th>
-                <td>{{ d_v_d.title }}</td>
+                <td>{{ dvd.title }}</td>
             </tr>
             <tr>
                 <th>Cote</th>
-                <td>{{ d_v_d.cote }}</td>
+                <td>{{ dvd.cote }}</td>
             </tr>
             <tr>
                 <th>Format</th>
-                <td>{{ d_v_d.format }}</td>
+                <td>{{ dvd.format }}</td>
             </tr>
             <tr>
                 <th>CodeOeuvre</th>
-                <td>{{ d_v_d.codeOeuvre }}</td>
+                <td>{{ dvd.codeOeuvre }}</td>
             </tr>
             <tr>
                 <th>Duration</th>
-                <td>{{ d_v_d.duration ? d_v_d.duration|date('H:i:s') : '' }}</td>
+                <td>{{ dvd.duration ? dvd.duration|date('H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('d_v_d_index') }}">back to list</a>
+    <a href="{{ path('dvd_index') }}">back to list</a>
 
-    <a href="{{ path('d_v_d_edit', {'id': d_v_d.id}) }}">edit</a>
+    <a href="{{ path('dvd_edit', {'id': dvd.id}) }}">edit</a>
 
-    {{ include('d_v_d/_delete_form.html.twig') }}
+    {{ include('dvd/_delete_form.html.twig') }}
 {% endblock %}
