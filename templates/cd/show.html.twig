@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CD{% endblock %}
+
+{% block body %}
+    <h1>CD</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ c_d.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ c_d.title }}</td>
+            </tr>
+            <tr>
+                <th>Cote</th>
+                <td>{{ c_d.cote }}</td>
+            </tr>
+            <tr>
+                <th>Format</th>
+                <td>{{ c_d.format }}</td>
+            </tr>
+            <tr>
+                <th>CodeOeuvre</th>
+                <td>{{ c_d.codeOeuvre }}</td>
+            </tr>
+            <tr>
+                <th>Plages</th>
+                <td>{{ c_d.plages }}</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>{{ c_d.duration ? c_d.duration|date('H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('c_d_index') }}">back to list</a>
+
+    <a href="{{ path('c_d_edit', {'id': c_d.id}) }}">edit</a>
+
+    {{ include('c_d/_delete_form.html.twig') }}
+{% endblock %}
