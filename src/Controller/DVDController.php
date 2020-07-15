@@ -11,22 +11,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/d/v/d")
+ * @Route("/dvd")
  */
 class DVDController extends AbstractController
 {
     /**
-     * @Route("/", name="d_v_d_index", methods={"GET"})
+     * @Route("/", name="dvd_index", methods={"GET"})
      */
     public function index(DVDRepository $dVDRepository): Response
     {
         return $this->render('dvd/index.html.twig', [
-            'd_v_ds' => $dVDRepository->findAll(),
+            'dvds' => $dVDRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="d_v_d_new", methods={"GET","POST"})
+     * @Route("/new", name="dvd_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -39,27 +39,27 @@ class DVDController extends AbstractController
             $entityManager->persist($dVD);
             $entityManager->flush();
 
-            return $this->redirectToRoute('d_v_d_index');
+            return $this->redirectToRoute('dvd_index');
         }
 
         return $this->render('dvd/new.html.twig', [
-            'd_v_d' => $dVD,
+            'dvd' => $dVD,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="d_v_d_show", methods={"GET"})
+     * @Route("/{id}", name="dvd_show", methods={"GET"})
      */
     public function show(DVD $dVD): Response
     {
         return $this->render('dvd/show.html.twig', [
-            'd_v_d' => $dVD,
+            'dvd' => $dVD,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="d_v_d_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="dvd_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, DVD $dVD): Response
     {
@@ -69,17 +69,17 @@ class DVDController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('d_v_d_index');
+            return $this->redirectToRoute('dvd_index');
         }
 
         return $this->render('dvd/edit.html.twig', [
-            'd_v_d' => $dVD,
+            'dvd' => $dVD,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="d_v_d_delete", methods={"DELETE"})
+     * @Route("/{id}", name="dvd_delete", methods={"DELETE"})
      */
     public function delete(Request $request, DVD $dVD): Response
     {
@@ -89,6 +89,6 @@ class DVDController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('d_v_d_index');
+        return $this->redirectToRoute('dvd_index');
     }
 }

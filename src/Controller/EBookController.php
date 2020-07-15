@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/e/book")
+ * @Route("/ebook")
  */
 class EBookController extends AbstractController
 {
