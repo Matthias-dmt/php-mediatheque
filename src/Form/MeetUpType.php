@@ -2,31 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\Member;
+use App\Entity\MeetUp;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MemberType extends AbstractType
+class MeetUpType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pseudo')
-            ->add('password')
-            ->add('firstName')
-            ->add('lastName')
-            ->add('postalCode')
-            ->add('city')
-            ->add('adress')
-            ->add('membershipDate')
+            ->add('date')
+            ->add('employee')
+            ->add('author')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Member::class,
+            'data_class' => MeetUp::class,
         ]);
     }
 }
