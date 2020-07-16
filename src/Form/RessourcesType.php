@@ -17,9 +17,9 @@ class RessourcesType extends AbstractType
             ->add('url')
             ->add('type', ChoiceType::class, [
                 'choices' => [
-                    'article' => 'article_type',
-                    'video' => 'video_type',
-                    'movie' => 'movie_type'
+                    'Article' => 'article',
+                    'Video' => 'video',
+                    'Movie' => 'movie'
                 ],
             ])
         ;
