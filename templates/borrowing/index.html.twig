@@ -3,15 +3,21 @@
 {% block title %}Borrowing index{% endblock %}
 
 {% block body %}
-    <h1>Borrowing index</h1>
+<style>
+th{
+    padding: 0 10px;
+}
+</style>
+
+    <h1>Administrer les Emprunts</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>StartDate</th>
-                <th>ExpectedReturnDate</th>
-                <th>EffectiveReturnDate</th>
+                <th>Date d'emprunt</th>
+                <th>Date de retour estimée</th>
+                <th>Date de retour réel</th>
                 <th>actions</th>
             </tr>
         </thead>
