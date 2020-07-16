@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Document;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,6 +17,11 @@ class DocumentType extends AbstractType
             ->add('cote')
             ->add('format')
             ->add('codeOeuvre')
+            ->add('ressources', CollectionType::class, [
+                'entry_type' => RessourcesType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+            ])
         ;
     }
 

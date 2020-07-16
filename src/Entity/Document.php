@@ -52,6 +52,11 @@ class Document
      */
     private $borrowings;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Ressources::class, mappedBy="documentId")
+     */
+    protected $ressources;
+
     public function __construct()
     {
         $this->author = new ArrayCollection();
@@ -111,6 +116,42 @@ class Document
 
         return $this;
     }
+
+    
+
+    /**
+     * @return Collection|Ressources[]
+     */
+    public function getRessources(): ?Collection
+    {
+        return $this->ressources;
+    }
+
+    public function addRessources(Ressources $ressources): self
+    {
+        if (!$this->ressources->contains($ressources)) {
+            $this->ressources[] = $ressources;
+            $ressources->setDocumentId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRessources(Ressources $ressources): self
+    {
+        if ($this->ressources->contains($ressources)) {
+            $this->ressources->removeElement($ressources);
+            // set the owning side to null (unless already changed)
+            if ($ressources->getDocumentId() === $this) {
+                $ressources->setDocumentId(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
 
     /**
      * @return Collection|Maintenance[]

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Document;
+use App\Entity\Ressources;
 use App\Form\DocumentType;
 use App\Repository\DocumentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,6 +32,7 @@ class DocumentController extends AbstractController
     public function new(Request $request): Response
     {
         $document = new Document();
+
         $form = $this->createForm(DocumentType::class, $document);
         $form->handleRequest($request);
 
