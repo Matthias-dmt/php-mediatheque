@@ -12,6 +12,14 @@
                 <td>{{ meet_up.id }}</td>
             </tr>
             <tr>
+                <th>Employée</th>
+                <td>{{ meet_up.getEmployee }}</td>
+            </tr>
+             <tr>
+                <th>Auteur</th>
+                <td>{{ meet_up.getAuthor }}</td>
+            </tr>
+            <tr>
                 <th>Date</th>
                 <td>{{ meet_up.date ? meet_up.date|date('Y-m-d H:i:s') : '' }}</td>
             </tr>

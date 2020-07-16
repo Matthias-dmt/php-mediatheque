@@ -10,6 +10,8 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Membre</th>
+                <th>Document</th>
                 <th>Date d'emprunt</th>
                 <th>Date de retour estimée</th>
                 <th>Date de retour réel</th>
@@ -20,6 +22,8 @@
         {% for borrowing in borrowings %}
             <tr>
                 <td>{{ borrowing.id }}</td>
+                <td>{{ borrowing.getMember }}</td>
+                <td>{{ borrowing.getDocument }}</td>
                 <td>{{ borrowing.startDate ? borrowing.startDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ borrowing.expectedReturnDate ? borrowing.expectedReturnDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ borrowing.effectiveReturnDate ? borrowing.effectiveReturnDate|date('Y-m-d H:i:s') : '' }}</td>

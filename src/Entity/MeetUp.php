@@ -77,4 +77,7 @@ class MeetUp
         return $this;
     }
 
+    public function __toString() {
+        return $this->author . ' ' . $this->date->format('Y-m-d');
+    }
 }

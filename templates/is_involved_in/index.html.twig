@@ -10,6 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>Role</th>
+                <th>Document</th>
+                <th>Auteur</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +20,8 @@
             <tr>
                 <td>{{ is_involved_in.id }}</td>
                 <td>{{ is_involved_in.role }}</td>
+                <td>{{ is_involved_in.getDocument }}</td>
+                <td>{{ is_involved_in.getAuthor }}</td>
                 <td>
                     <a href="{{ path('is_involved_in_show', {'id': is_involved_in.id}) }}">show</a>
                     <a href="{{ path('is_involved_in_edit', {'id': is_involved_in.id}) }}">edit</a>

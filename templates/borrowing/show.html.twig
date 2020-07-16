@@ -11,6 +11,14 @@
                 <th>Id</th>
                 <td>{{ borrowing.id }}</td>
             </tr>
+             <tr>
+                <th>Membre</th>
+                <td>{{ borrowing.getMember }}</td>
+            </tr>
+             <tr>
+                <th>Document</th>
+                <td>{{ borrowing.getDocument }}</td>
+            </tr>
             <tr>
                 <th>StartDate</th>
                 <td>{{ borrowing.startDate ? borrowing.startDate|date('Y-m-d H:i:s') : '' }}</td>

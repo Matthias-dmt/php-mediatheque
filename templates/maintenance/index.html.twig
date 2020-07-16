@@ -9,6 +9,8 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Employée</th>
+                <th>Document</th>
                 <th>Status</th>
                 <th>MaintenanceDate</th>
                 <th>actions</th>
@@ -18,6 +20,8 @@
         {% for maintenance in maintenances %}
             <tr>
                 <td>{{ maintenance.id }}</td>
+                <td>{{ maintenance.getEmployee }}</td>
+                <td>{{ maintenance.getDocument }}</td>
                 <td>{{ maintenance.status }}</td>
                 <td>{{ maintenance.maintenanceDate ? maintenance.maintenanceDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>

@@ -9,6 +9,8 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Employée</th>
+                <th>Auteur</th>
                 <th>Date</th>
                 <th>actions</th>
             </tr>
@@ -17,6 +19,8 @@
         {% for meet_up in meet_ups %}
             <tr>
                 <td>{{ meet_up.id }}</td>
+                <td>{{ meet_up.getEmployee }}</td>
+                <td>{{ meet_up.getAuthor }}</td>
                 <td>{{ meet_up.date ? meet_up.date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('meet_up_show', {'id': meet_up.id}) }}">show</a>
