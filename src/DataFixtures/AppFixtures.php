@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
             $dvd->setCote($faker->text($maxNbChars = 5));
             $dvd->setFormat($faker->randomElement($array = array ('audio','video','blueray')));
             $dvd->setCodeOeuvre($faker->randomNumber($nbDigits = NULL, $strict = false));
-            $dvd->setDuration($faker->time($format = 'H:i:s', $max = 'now'));
+            $dvd->setDuration($faker->dateTime($max = 'now', $timezone = null));
             $manager->persist($dvd);
         }
         $manager->flush();
