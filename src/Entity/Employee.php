@@ -17,7 +17,7 @@ class Employee extends User
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
 
     /**
