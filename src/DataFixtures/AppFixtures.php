@@ -6,6 +6,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Book;
 use App\Entity\DVD;
+use App\Entity\Author;
 use Faker;
 
 class AppFixtures extends Fixture
@@ -37,6 +38,14 @@ class AppFixtures extends Fixture
             $dvd->setCodeOeuvre($faker->randomNumber($nbDigits = NULL, $strict = false));
             $dvd->setDuration($faker->dateTime($max = 'now', $timezone = null));
             $manager->persist($dvd);
+        }
+        $manager->flush();
+
+        for ($i = 0; $i < 10; $i++) {
+            $author = new Author();
+            $author->setFirstName($faker->firstName($gender = 'male'|'female'));
+            $author->setLastName($faker->lastName);
+            $manager->persist($author);
         }
         $manager->flush();
     }
