@@ -10,20 +10,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DocumentType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('title')
-            ->add('cote')
-            ->add('format')
-            ->add('codeOeuvre')
-            ->add('ressources', CollectionType::class, [
-                'entry_type' => RessourcesType::class,
-                'entry_options' => ['label' => false],
-                'allow_add' => true,
-            ])
-        ;
-    }
+
+    // public function buildForm(FormBuilderInterface $builder, array $options)
+    // {
+    //     $builder
+    //         ->add('title')
+    //         ->add('cote')
+    //         ->add('format')
+    //         ->add('codeOeuvre')
+    //         ->add('ressources', CollectionType::class, [
+    //             'entry_type' => RessourcesType::class,
+    //             'entry_options' => ['label' => false],
+    //             'allow_add' => true,
+    //         ])
+    //     ;
+    // }
 
     public function configureOptions(OptionsResolver $resolver)
     {

@@ -27,5 +27,10 @@
                 <a href="{{ path('meet_up_index') }}">Meet Up</a>
                 <a href="{{ path('is_involved_in_index') }}">Lien</a>
 
-	</div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('js/formRessources.js') }}"></script>
+    
 {% endblock %}

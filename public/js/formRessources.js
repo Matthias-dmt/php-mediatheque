@@ -30,9 +30,14 @@ function addRessourcesForm($collectionHolder, $newLinkLi) {
     
     // Get the data-prototype explained earlier
     //var prototype = $collectionHolder.data('prototype');
-    var collection = document.querySelector('ul.ressources');
-    var div = document.querySelector('div#document_ressources');
-console.log(div);
+    // var collection = document.querySelector('ul.ressources');
+
+    var ressourcesSelector = [];
+
+    console.log(ressourcesSelector);
+    
+    var div = document.querySelector('div#'.ressourcesSelector);
+//console.log(div);
     var prototype = div.dataset.prototype;
 
     // get the new index
@@ -43,7 +48,7 @@ console.log(div);
     // Replace '__name__label__' in the prototype's HTML to
     // instead be a number based on how many items we have
     // newForm = newForm.replace(/__name__label__/g, index);
-console.log(newForm);
+
     // Replace '__name__' in the prototype's HTML to
     // instead be a number based on how many items we have
     newForm = newForm.replace(/__name__/g, index);
