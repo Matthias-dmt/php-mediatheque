@@ -32,16 +32,27 @@ function addRessourcesForm($collectionHolder, $newLinkLi) {
     //var prototype = $collectionHolder.data('prototype');
     // var collection = document.querySelector('ul.ressources');
 
-    var ressourcesSelector = [];
-
-    console.log(ressourcesSelector);
     
-    var div = document.querySelector('div#'.ressourcesSelector);
+
+    // console.log(ressourcesSelector);
+    let div;
+
+    let ressourcesSelector = ['dvd','journal', 'book', 'cd','ebook'];
+
+        ressourcesSelector.forEach(element => {
+
+            if(document.querySelector('#'+element+'_ressources')){
+            div = document.querySelector('#'+element+'_ressources');
+        }
+    });
+
+    console.log(div);
+    
 //console.log(div);
     var prototype = div.dataset.prototype;
 
     // get the new index
-    var index = collection.dataset.index;
+    var index = div.dataset.index;
 
     var newForm = prototype;
     // You need this only if you didn't set 'label' => false in your tags field in TaskType
