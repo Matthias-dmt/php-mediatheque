@@ -31,7 +31,7 @@ class Ressources
      * @ORM\ManyToOne(targetEntity=Document::class, inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $document;
+    private $documentId;
 
     public function getId(): ?int
     {
@@ -62,14 +62,14 @@ class Ressources
         return $this;
     }
 
-    public function getDocument(): ?Document
+    public function getDocumentId(): ?Document
     {
-        return $this->document;
+        return $this->documentId;
     }
 
-    public function setDocument(?Document $document): self
+    public function setDocumentId(?Document $documentId): self
     {
-        $this->document= $document;
+        $this->documentId = $documentId;
 
         return $this;
     }
