@@ -53,7 +53,7 @@ class Document
     private $borrowings;
 
     /**
-     * @ORM\OneToMany(targetEntity=Ressources::class, mappedBy="documentId", cascade="persist")
+     * @ORM\OneToMany(targetEntity=Ressources::class, mappedBy="document", cascade="persist")
      */
     protected $ressources;
 
@@ -128,23 +128,23 @@ class Document
         return $this->ressources;
     }
 
-    public function addRessources(Ressources $ressources): self
+    public function addRessource(Ressource $ressource): self
     {
-        if (!$this->ressources->contains($ressources)) {
-            $this->ressources[] = $ressources;
-            $ressources->setDocumentId($this);
+        if (!$this->ressource->contains($ressource)) {
+            $this->ressource[] = $ressource;
+            $ressource->setDocument($this);
         }
 
         return $this;
     }
 
-    public function removeRessources(Ressources $ressources): self
+    public function removeRessource(Ressource $ressource): self
     {
-        if ($this->ressources->contains($ressources)) {
-            $this->ressources->removeElement($ressources);
+        if ($this->ressource->contains($ressource)) {
+            $this->ressource->removeElement($ressource);
             // set the owning side to null (unless already changed)
-            if ($ressources->getDocumentId() === $this) {
-                $ressources->setDocumentId(null);
+            if ($ressource->getDocument() === $this) {
+                $ressource->setDocument(null);
             }
         }
 
