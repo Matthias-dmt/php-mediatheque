@@ -37,7 +37,7 @@ function addRessourcesForm($collectionHolder, $newLinkLi) {
     // console.log(ressourcesSelector);
     let div;
 
-    let ressourcesSelector = ['dvd','journal', 'book', 'cd'];
+    let ressourcesSelector = ['dvd','journal', 'book', 'cd','ebook'];
 
         ressourcesSelector.forEach(element => {
 
