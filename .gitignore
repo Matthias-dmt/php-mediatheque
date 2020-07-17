@@ -58,7 +58,7 @@
 
 
 # .Env
-.env
+/.env
 
 # Migration
 /src/Migrations/*
