@@ -36,40 +36,40 @@ class AppFixtures extends Fixture
         $manager->flush();
 
          // on créé 100 ebooks
-         for ($i = 0; $i < 10; $i++) {
-            $book = new EBook();
-            $book->setTitle($faker->name);
-            $book->setCote($faker->text($maxNbChars = 5));
-            $book->setFormat($faker->randomElement($array = array ('de poche','grand','moyen')));
-            $book->setCodeOeuvre($faker->randomNumber($nbDigits = NULL, $strict = false));
-            $book->setPages($faker->numberBetween($min = 20, $max = 500));
-            $manager->persist($book);
+         for ($i = 0; $i < 100; $i++) {
+            $ebook = new EBook();
+            $ebook->setTitle($faker->name);
+            $ebook->setCote($faker->text($maxNbChars = 5));
+            $ebook->setFormat($faker->randomElement($array = array ('de poche','grand','moyen')));
+            $ebook->setCodeOeuvre($faker->randomNumber($nbDigits = NULL, $strict = false));
+            $ebook->setPages($faker->numberBetween($min = 20, $max = 500));
+            $manager->persist($ebook);
         }
         $manager->flush();
 
          // on créé 100 cd
-         for ($i = 0; $i < 10; $i++) {
-            $book = new CD();
-            $book->setTitle($faker->name);
-            $book->setCote($faker->text($maxNbChars = 5));
-            $book->setFormat($faker->randomElement($array = array ('de poche','grand','moyen')));
-            $book->setCodeOeuvre($faker->randomNumber($nbDigits = NULL, $strict = false));
-            $book->setPlages($faker->numberBetween($min = 10, $max = 50));
-            $book->setDuration($faker->numberBetween($min = 20, $max = 500));
-            $manager->persist($book);
+         for ($i = 0; $i < 100; $i++) {
+            $cd = new CD();
+            $cd->setTitle($faker->name);
+            $cd->setCote($faker->text($maxNbChars = 5));
+            $cd->setFormat($faker->randomElement($array = array ('audio','video','blueray')));
+            $cd->setCodeOeuvre($faker->randomNumber($nbDigits = NULL, $strict = false));
+            $cd->setPlages($faker->numberBetween($min = 1, $max = 100));
+            $cd->setDuration($faker->dateTime($max = 'now', $timezone = null));
+            $manager->persist($cd);
         }
         $manager->flush();
 
          // on créé 100 journal
-         for ($i = 0; $i < 10; $i++) {
-            $book = new Journal();
-            $book->setTitle($faker->name);
-            $book->setCote($faker->text($maxNbChars = 5));
-            $book->setFormat($faker->randomElement($array = array ('de poche','grand','moyen')));
-            $book->setCodeOeuvre($faker->randomNumber($nbDigits = NULL, $strict = false));
-            $book->setPeriodicity($faker->numberBetween($min = 20, $max = 500));
-            $book->setSubscriptionDate($faker->numberBetween($min = 20, $max = 500));
-            $manager->persist($book);
+         for ($i = 0; $i < 100; $i++) {
+            $journal = new Journal();
+            $journal->setTitle($faker->name);
+            $journal->setCote($faker->text($maxNbChars = 5));
+            $journal->setFormat($faker->randomElement($array = array ('de poche','grand','moyen')));
+            $journal->setCodeOeuvre($faker->randomNumber($nbDigits = NULL, $strict = false));
+            $journal->setPeriodicity($faker->randomElement($array = array ('1 jour','1 semaine','1 mois')));
+            $journal->setSubscriptionDate($faker->dateTime($max = 'now', $timezone = null));
+            $manager->persist($journal);
         }
         $manager->flush();
 
