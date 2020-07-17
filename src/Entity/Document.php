@@ -128,31 +128,28 @@ class Document
         return $this->ressources;
     }
 
-    public function addRessource(Ressource $ressource): self
+    public function addRessources(Ressources $ressources): self
     {
-        if (!$this->ressource->contains($ressource)) {
-            $this->ressource[] = $ressource;
-            $ressource->setDocument($this);
+        if (!$this->ressources->contains($ressources)) {
+            $this->ressources[] = $ressources;
+            $ressources->setDocument($this);
         }
 
         return $this;
     }
 
-    public function removeRessource(Ressource $ressource): self
+    public function removeRessources(Ressources $ressources): self
     {
-        if ($this->ressource->contains($ressource)) {
-            $this->ressource->removeElement($ressource);
+        if ($this->ressources->contains($ressources)) {
+            $this->ressources->removeElement($ressources);
             // set the owning side to null (unless already changed)
-            if ($ressource->getDocument() === $this) {
-                $ressource->setDocument(null);
+            if ($ressources->getDocument() === $this) {
+                $ressources->setDocument(null);
             }
         }
 
         return $this;
     }
-
-
-
 
     /**
      * @return Collection|Maintenance[]
@@ -222,7 +219,4 @@ class Document
         // to show the id of the Category in the select
         // return $this->id;
     }
-
-
-
 }
