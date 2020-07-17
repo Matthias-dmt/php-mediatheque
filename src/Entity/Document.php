@@ -53,7 +53,7 @@ class Document
     private $borrowings;
 
     /**
-     * @ORM\OneToMany(targetEntity=Ressources::class, mappedBy="documentId")
+     * @ORM\OneToMany(targetEntity=Ressources::class, mappedBy="documentId", cascade="persist")
      */
     protected $ressources;
 
@@ -62,6 +62,7 @@ class Document
         $this->author = new ArrayCollection();
         $this->maintenances = new ArrayCollection();
         $this->borrowings = new ArrayCollection();
+        $this->ressources = new ArrayCollection();
     }
 
     public function getId(): ?int
