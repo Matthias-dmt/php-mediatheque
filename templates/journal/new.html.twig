@@ -6,17 +6,9 @@
     <h1>Create new Journal</h1>
 
     
-    {{ form_start(form) }}
-    {#{ form_row(form) }#}
+    
     {{ include('journal/_form.html.twig') }}
-        <h3>Ressources</h3>
-        <ul class="ressources">
-            {% for ressources in form.ressources %}
-                <li>{{ form_row(ressources.url) }}</li>
-                <li>{{ form_row(ressources.type) }}</li>
-            {% endfor %}
-        </ul>
-    {{ form_end(form) }} 
+
 
     <a href="{{ path('journal_index') }}">back to list</a>
 {% endblock %}

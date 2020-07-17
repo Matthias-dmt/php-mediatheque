@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Journal;
+use App\Entity\Ressources;
 use App\Form\JournalType;
 use App\Repository\JournalRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,6 +34,10 @@ class JournalController extends AbstractController
         $journal = new Journal();
         $form = $this->createForm(JournalType::class, $journal);
         $form->handleRequest($request);
+
+        foreach($journal->getRessources() as $ressource){
+            $ressource->setDocument($journal);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();

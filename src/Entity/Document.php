@@ -53,7 +53,7 @@ class Document
     private $borrowings;
 
     /**
-     * @ORM\OneToMany(targetEntity=Ressources::class, mappedBy="document", cascade="persist")
+     * @ORM\OneToMany(targetEntity=Ressources::class, mappedBy="document", cascade={"persist"})
      */
     protected $ressources;
 

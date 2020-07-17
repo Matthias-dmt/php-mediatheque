@@ -6,6 +6,7 @@ var formRessources = '<label for="url">Url : </label><input type="text" id ="url
 var $addRessourcesButton = $('<button type="button" class="add_ressources_link">Add ressources</button>');
 var $newLinkLi = $('<li></li>').append($addRessourcesButton);
 
+let index = 0;
 
 
 jQuery(document).ready(function() {
@@ -49,12 +50,11 @@ function addRessourcesForm($collectionHolder, $newLinkLi) {
     console.log(div);
     
 //console.log(div);
-    var prototype = div.dataset.prototype;
+    let prototype = div.dataset.prototype;
 
     // get the new index
-    var index = div.dataset.index;
-
-    var newForm = prototype;
+    //var index = div.dataset.index;
+    let newForm = prototype;
     // You need this only if you didn't set 'label' => false in your tags field in TaskType
     // Replace '__name__label__' in the prototype's HTML to
     // instead be a number based on how many items we have
@@ -65,9 +65,9 @@ function addRessourcesForm($collectionHolder, $newLinkLi) {
     newForm = newForm.replace(/__name__/g, index);
     
     // increase the index with one for the next item
-    $collectionHolder.data('index', index + 1);
-
+    index++;
+    
     // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormLi = $('<li></li>').append(newForm);
+    $newFormLi = $('<li></li>').append(newForm);
     $newLinkLi.before($newFormLi);
 }

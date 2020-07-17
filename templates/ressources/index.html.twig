@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Url</th>
                 <th>Type</th>
+                <th>Doc_Id</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                 <td>{{ ressource.id }}</td>
                 <td>{{ ressource.url }}</td>
                 <td>{{ ressource.type }}</td>
+                <td>{{ ressource.document }}</td>
                 <td>
                     <a href="{{ path('ressources_show', {'id': ressource.id}) }}">show</a>
                     <a href="{{ path('ressources_edit', {'id': ressource.id}) }}">edit</a>

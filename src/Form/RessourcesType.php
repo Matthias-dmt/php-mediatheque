@@ -21,8 +21,7 @@ class RessourcesType extends AbstractType
                     'Video' => 'video',
                     'Movie' => 'movie'
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
