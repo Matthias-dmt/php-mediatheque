@@ -9,7 +9,7 @@
 
     {{ include('is_involved_in/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('is_involved_in_index') }}">back to list</a>
+    <button type="button" class="btn btn-secondary mb-3"><a href="{{ path('is_involved_in_index') }}">back to list</a></button>
 
     {{ include('is_involved_in/_delete_form.html.twig') }}
 </div>

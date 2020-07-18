@@ -8,7 +8,7 @@
 
         {{ include('ressources/_form.html.twig', {'button_label': 'Update'}) }}
 
-        <a href="{{ path('ressources_index') }}">back to list</a>
+        <button type="button" class="btn btn-secondary mb-3"><a href="{{ path('ressources_index') }}">back to list</a></button>
 
         {{ include('ressources/_delete_form.html.twig') }}
     </div>

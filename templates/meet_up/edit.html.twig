@@ -9,7 +9,7 @@
 
     {{ include('meet_up/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('meet_up_index') }}">back to list</a>
+    <button type="button" class="btn btn-secondary mb-3"><a href="{{ path('meet_up_index') }}">back to list</a></button>
 
     {{ include('meet_up/_delete_form.html.twig') }}
 </div>

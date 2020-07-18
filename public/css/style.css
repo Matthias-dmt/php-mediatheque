@@ -1,3 +1,8 @@
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .example-wrapper {
     margin: 1em auto;
     font: 18px / 1.5 sans-serif;
