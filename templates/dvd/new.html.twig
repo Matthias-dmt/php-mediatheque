@@ -2,7 +2,9 @@
 
 {% block title %}New DVD{% endblock %}
 
-{% block body %}
+{% block main %}
+<div class="container mt-3">
+
     <h1>Create new DVD</h1>
 
     
@@ -19,4 +21,5 @@
     {{ form_end(form) }} 
 
     <a href="{{ path('dvd_index') }}">back to list</a>
+</div>
 {% endblock %}

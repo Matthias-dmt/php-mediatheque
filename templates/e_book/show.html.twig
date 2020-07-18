@@ -1,9 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/baseAdmin.html.twig' %}
 
 {% block title %}EBook{% endblock %}
 
-{% block body %}
-    <h1>EBook</h1>
+{% block main %}
+<div class="container-fluid offset-1 col-10">
+
+    <h1 class="mb-3">EBook</h1>
 
     <table class="table">
         <tbody>
@@ -39,4 +41,5 @@
     <a href="{{ path('e_book_edit', {'id': e_book.id}) }}">edit</a>
 
     {{ include('e_book/_delete_form.html.twig') }}
+</div>
 {% endblock %}

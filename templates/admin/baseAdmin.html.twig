@@ -1,36 +1,72 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}Admin
+{% block title %}
+    Admin
 {% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+{% endblock %}
+
 
 
 {% block body %}
+    {% block header %}
 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="#">Admin Media library</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{{ path('user_index') }}" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Management
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ path('maintenance_index') }}">Maintenance</a>
+                        <a class="dropdown-item" href="{{ path('borrowing_index') }}">Emprunt</a>
+                        <a class="dropdown-item" href="{{ path('meet_up_index') }}">Meet Up</a>
+                        <a class="dropdown-item" href="{{ path('is_involved_in_index') }}">IsInvolvedIn</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{{ path('user_index') }}" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    User
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ path('member_index') }}">Member</a>
+                        <a class="dropdown-item" href="{{ path('employee_index') }}">Employee</a>
+                        <a class="dropdown-item" href="{{ path('author_index') }}">Author</a>
+                    </div>
+                </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{{ path('document_index') }}" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Document
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{ path('book_index') }}">Book</a>
+                    <a class="dropdown-item" href="{{ path('e_book_index') }}">Ebook</a>
+                    <a class="dropdown-item" href="{{ path('dvd_index') }}">DVD</a>
+                    <a class="dropdown-item" href="{{ path('cd_index') }}">CD</a>
+                    <a class="dropdown-item" href="{{ path('journal_index') }}">Newspaper</a>
+                    <a class="dropdown-item" href="{{ path('ressources_index') }}">Ressources</a>
+                </div>
+            </li>
+            </ul>
+        </div>
+    </nav>
+    {% endblock %}
+    {% block main %}
+    {% endblock %}
 
-		<h1>Admin :</h1>
-
-	<div class="example-wrapper">
-                <a href="{{ path('author_index') }}">Author</a>
-                <a href="{{ path('user_index') }}">User</a>
-                <a href="{{ path('member_index') }}">Member</a>
-                <a href="{{ path('employee_index') }}">Employee</a>
-                <a href="{{ path('maintenance_index') }}">Maintenance</a>
-                <a href="{{ path('document_index') }}">Document</a>
-                <a href="{{ path('book_index') }}">Book</a>
-                <a href="{{ path('e_book_index') }}">Livre Numérique</a>
-                <a href="{{ path('journal_index') }}">Journal</a>
-                <a href="{{ path('dvd_index') }}">DVD</a>
-                <a href="{{ path('cd_index') }}">CD</a>
-                <a href="{{ path('ressources_index') }}">Ressources</a>
-                <a href="{{ path('borrowing_index') }}">Emprunt</a>
-                <a href="{{ path('meet_up_index') }}">Meet Up</a>
-                <a href="{{ path('is_involved_in_index') }}">Lien</a>
-
-    </div>
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="{{ asset('js/formRessources.js') }}"></script>
-    
 {% endblock %}
