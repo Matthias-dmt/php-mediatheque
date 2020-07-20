@@ -29,7 +29,7 @@ class MeetUp
     private $employee;
 
     /**
-     * @ORM\OneToOne(targetEntity=Author::class,  cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Author::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
