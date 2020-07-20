@@ -2,8 +2,8 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use App\Entity\Book;
 use App\Entity\DVD;
 use App\Entity\Author;
@@ -17,20 +17,26 @@ use App\Entity\Maintenance;
 use App\Entity\Participates;
 use App\Entity\IsInvolvedIn;
 
-
-
-
 use Faker;
 
 class AppFixtures extends Fixture
 {
+    private $manager;
+
+    public function __construct(ObjectManager $entityManager)
+    {
+        $this->manager = $entityManager;
+    }
+
     public function load(ObjectManager $manager)
     {
         // $product = new Product();
         // $manager->persist($product);
-    // On configure dans quelles langues nous voulons nos données
+        // On configure dans quelles langues nous voulons nos données
         $faker = Faker\Factory::create('fr_FR');
 
+        $rep = $this->manager->getRepository("User");
+        
         // on créé 100 books
         for ($i = 0; $i < 100; $i++) {
             $book = new Book();
@@ -131,10 +137,9 @@ class AppFixtures extends Fixture
         // on créé 100 participates
         for ($i = 0; $i < 100; $i++) {
             $participates = new Participates();
-            $participates->setPseudo($faker->firstName($gender = 'male'|'female') . $faker->lastName);
-            $participates->setFirstName($faker->firstName($gender = 'male'|'female'));
-            $participates->setLastName($faker->lastName);
-            $participates->setPassword($faker->password);
+            $participates->setPlaces($faker->numberBetween($min = 20, $max = 200));
+            $participates->setMeetUp($faker->numberBetween($min = 0, $max = 100));
+            $participates->setUser($faker->numberBetween($min = 0, $max = 100));
             $manager->persist($participates);
         }
         $manager->flush();
@@ -142,10 +147,9 @@ class AppFixtures extends Fixture
         // on créé 100 IsInvolvdIn
         for ($i = 0; $i < 100; $i++) {
             $isInvolvedIn = new IsInvolvedIn();
-            $isInvolvedIn->setPseudo($faker->firstName($gender = 'male'|'female') . $faker->lastName);
-            $isInvolvedIn->setFirstName($faker->firstName($gender = 'male'|'female'));
-            $isInvolvedIn->setLastName($faker->lastName);
-            $isInvolvedIn->setPassword($faker->password);
+            $isInvolvedIn->setRole($faker->firstName($gender = 'male'|'female') . $faker->lastName);
+            $isInvolvedIn->setDocument($faker->firstName($gender = 'male'|'female'));
+            $isInvolvedIn->setAuthor($faker->lastName);
             $manager->persist($isInvolvedIn);
         }
         $manager->flush();
@@ -153,10 +157,10 @@ class AppFixtures extends Fixture
         // on créé 100 maintenance
         for ($i = 0; $i < 100; $i++) {
             $maintenance = new Maintenance();
-            $maintenance->setPseudo($faker->firstName($gender = 'male'|'female') . $faker->lastName);
-            $maintenance->setFirstName($faker->firstName($gender = 'male'|'female'));
-            $maintenance->setLastName($faker->lastName);
-            $maintenance->setPassword($faker->password);
+            $maintenance->setStatus($faker->firstName($gender = 'male'|'female') . $faker->lastName);
+            $maintenance->setMaintenanceDate($faker->firstName($gender = 'male'|'female'));
+            $maintenance->setemployee($faker->lastName);
+            $maintenance->setDocument($faker->password);
             $manager->persist($maintenance);
         }
         $manager->flush();
