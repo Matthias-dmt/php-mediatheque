@@ -10,7 +10,9 @@ use App\Entity\Author;
 use App\Entity\Ebook;
 use App\Entity\CD;
 use App\Entity\Journal;
-
+use App\Entity\Member;
+use App\Entity\Employee;
+use App\Entity\User;
 
 use Faker;
 
@@ -60,7 +62,7 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-         // on créé 100 journal
+         // on créé 100 journals
          for ($i = 0; $i < 100; $i++) {
             $journal = new Journal();
             $journal->setTitle($faker->name);
@@ -91,6 +93,32 @@ class AppFixtures extends Fixture
             $author->setFirstName($faker->firstName($gender = 'male'|'female'));
             $author->setLastName($faker->lastName);
             $manager->persist($author);
+        }
+        $manager->flush();
+
+        // on créé 100 membres
+        for ($i = 0; $i < 100; $i++) {
+            $member = new Member();
+            $member->setPseudo($faker->firstName($gender = 'male'|'female') . $faker->lastName);
+            $member->setPassword($faker->password);
+            $member->setFirstName($faker->firstName($gender = 'male'|'female'));
+            $member->setLastName($faker->lastName);
+            $member->setPostalCode($faker->numberBetween($min = 10000, $max = 99999));
+            $member->setCity($faker->city);
+            $member->setAdress($faker->address);
+            $member->setMembershipDate($faker->dateTimeAD($max = 'now', $timezone = null));
+            $manager->persist($member);
+        }
+        $manager->flush();
+
+        // on créé 10 employées
+        for ($i = 0; $i < 10; $i++) {
+            $employee = new Employee();
+            $employee->setPseudo($faker->firstName($gender = 'male'|'female') . $faker->lastName);
+            $employee->setFirstName($faker->firstName($gender = 'male'|'female'));
+            $employee->setLastName($faker->lastName);
+            $employee->setPassword($faker->password);
+            $manager->persist($employee);
         }
         $manager->flush();
     }
