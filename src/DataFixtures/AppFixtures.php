@@ -21,7 +21,7 @@ use App\Entity\Maintenance;
 use App\Entity\Participates;
 use App\Entity\IsInvolvedIn;
 use App\Entity\MeetUp;
-use Doctrine\ORM\EntityManagerInterface;
+
 use Faker;
 
 class AppFixtures extends Fixture
@@ -38,7 +38,7 @@ class AppFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
         // On configure dans quelles langues nous voulons nos données
-        $faker = Faker\Factory::create('fr_FR');
+        // $faker = Faker\Factory::create('fr_FR');
 
         $docRep = $this->manager->getRepository(Document::class);
         $userRep = $this->manager->getRepository(User::class);
@@ -46,7 +46,7 @@ class AppFixtures extends Fixture
         $authorRep = $this->manager->getRepository(Author::class);
         $employeeRep = $this->manager->getRepository(Employee::class);
         $memberRep = $this->manager->getRepository(Member::class);
-        
+        var_dump($employeeRep->findByAll());
         // on créé 100 book
         for ($i = 0; $i < 100; $i++) {
             $book = new Book();
@@ -224,6 +224,7 @@ class AppFixtures extends Fixture
             $manager->persist($maintenance);
         }
         $manager->flush();
+        
     }
 }
-}
+
