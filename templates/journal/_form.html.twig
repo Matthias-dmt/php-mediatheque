@@ -1,14 +1,8 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
 
-    {#{ form_row(form) }#}
-        <h3>Ressources</h3>
-        <ul class="ressources">
-            {% for ressources in form.ressources %}
-                <li>{{ form_row(ressources.url) }}</li>
-                <li>{{ form_row(ressources.type) }}</li>
-            {% endfor %}
-        </ul>
+    {{ include('ressources/mult_form.html.twig') }}
+    
         
     <button class="btn">{{ button_label|default('Save') }}</button>
     

@@ -34,6 +34,10 @@ class BookController extends AbstractController
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
+        foreach($book->getRessources() as $ressource){
+            $ressource->setDocument($book);
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($book);
@@ -65,6 +69,10 @@ class BookController extends AbstractController
     {
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
+
+        foreach($book->getRessources() as $ressource){
+            $ressource->setDocument($book);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();

@@ -34,6 +34,10 @@ class EBookController extends AbstractController
         $form = $this->createForm(EBookType::class, $eBook);
         $form->handleRequest($request);
 
+        foreach($eBook->getRessources() as $ressource){
+            $ressource->setDocument($eBook);
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($eBook);
@@ -65,6 +69,11 @@ class EBookController extends AbstractController
     {
         $form = $this->createForm(EBookType::class, $eBook);
         $form->handleRequest($request);
+
+        foreach($eBook->getRessources() as $ressource){
+            $ressource->setDocument($eBook);
+        }
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();

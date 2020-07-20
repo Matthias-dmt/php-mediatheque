@@ -34,6 +34,10 @@ class DVDController extends AbstractController
         $form = $this->createForm(DVDType::class, $dVD);
         $form->handleRequest($request);
 
+        foreach($dVD->getRessources() as $ressource){
+            $ressource->setDocument($dVD);
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($dVD);
@@ -65,6 +69,10 @@ class DVDController extends AbstractController
     {
         $form = $this->createForm(DVDType::class, $dVD);
         $form->handleRequest($request);
+
+        foreach($dVD->getRessources() as $ressource){
+            $ressource->setDocument($dVD);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();

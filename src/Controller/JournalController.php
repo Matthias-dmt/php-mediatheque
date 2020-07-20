@@ -71,6 +71,10 @@ class JournalController extends AbstractController
         $form = $this->createForm(JournalType::class, $journal);
         $form->handleRequest($request);
 
+        foreach($journal->getRessources() as $ressource){
+            $ressource->setDocument($journal);
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 

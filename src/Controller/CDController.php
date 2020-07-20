@@ -34,6 +34,10 @@ class CDController extends AbstractController
         $form = $this->createForm(CDType::class, $cD);
         $form->handleRequest($request);
 
+        foreach($cD->getRessources() as $ressource){
+            $ressource->setDocument($cD);
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($cD);
@@ -63,9 +67,15 @@ class CDController extends AbstractController
      */
     public function edit(Request $request, CD $cD): Response
     {
+        
+        
         $form = $this->createForm(CDType::class, $cD);
         $form->handleRequest($request);
-
+        
+        foreach($cD->getRessources() as $ressource){
+            $ressource->setDocument($cD);
+        }
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
