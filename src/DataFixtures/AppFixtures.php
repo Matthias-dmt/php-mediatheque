@@ -21,6 +21,7 @@ use App\Entity\Maintenance;
 use App\Entity\Participates;
 use App\Entity\IsInvolvedIn;
 use App\Entity\MeetUp;
+use Doctrine\ORM\EntityManagerInterface;
 use Faker;
 
 class AppFixtures extends Fixture
