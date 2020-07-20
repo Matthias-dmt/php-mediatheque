@@ -9,6 +9,7 @@ use App\Entity\DVD;
 use App\Entity\Author;
 use App\Entity\Ebook;
 use App\Entity\CD;
+use App\Entity\Document;
 use App\Entity\Journal;
 use App\Entity\Member;
 use App\Entity\Employee;
@@ -16,26 +17,33 @@ use App\Entity\User;
 use App\Entity\Maintenance;
 use App\Entity\Participates;
 use App\Entity\IsInvolvedIn;
-
+use App\Entity\MeetUp;
+use Doctrine\ORM\EntityManagerInterface;
 use Faker;
 
 class AppFixtures extends Fixture
 {
     private $manager;
 
-    public function __construct(ObjectManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->manager = $entityManager;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager) 
     {
         // $product = new Product();
         // $manager->persist($product);
         // On configure dans quelles langues nous voulons nos données
         $faker = Faker\Factory::create('fr_FR');
 
-        $rep = $this->manager->getRepository("User");
+        $docRep = $this->manager->getRepository(Document::class);
+        $userRep = $this->manager->getRepository(User::class);
+        $meetUpRep = $this->manager->getRepository(MeetUp::class);
+        $authorRep = $this->manager->getRepository(Author::class);
+        $employeeRep = $this->manager->getRepository(Employee::class);
+
+
         
         // on créé 100 books
         for ($i = 0; $i < 100; $i++) {
@@ -134,12 +142,13 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
+
         // on créé 100 participates
         for ($i = 0; $i < 100; $i++) {
             $participates = new Participates();
             $participates->setPlaces($faker->numberBetween($min = 20, $max = 200));
-            $participates->setMeetUp($faker->numberBetween($min = 0, $max = 100));
-            $participates->setUser($faker->numberBetween($min = 0, $max = 100));
+            $participates->setMeetUp($meetUpRep->find($faker->numberBetween($min = 0, $max = 100)));
+            $participates->setUser($userRep->find($faker->numberBetween($min = 0, $max = 100)));
             $manager->persist($participates);
         }
         $manager->flush();
@@ -147,9 +156,29 @@ class AppFixtures extends Fixture
         // on créé 100 IsInvolvdIn
         for ($i = 0; $i < 100; $i++) {
             $isInvolvedIn = new IsInvolvedIn();
-            $isInvolvedIn->setRole($faker->firstName($gender = 'male'|'female') . $faker->lastName);
-            $isInvolvedIn->setDocument($faker->firstName($gender = 'male'|'female'));
-            $isInvolvedIn->setAuthor($faker->lastName);
+            
+            $isInvolvedIn->setDocument($docRep->find($faker->numberBetween($min = 0, $max = 500)));
+            
+            switch(get_class($isInvolvedIn->getDocument())) 
+            {
+                case "App\Entity\DVD":
+                    $isInvolvedIn->setRole($faker->randomElement($array = array ('acteur','producteur','scénariste', 'réalisateur'))); 
+                    break;
+                case "App\Entity\CD":
+                    $isInvolvedIn->setRole($faker->randomElement($array = array ('chanteur','compositeur','musicien'))); 
+                    break;
+                case "App\Entity\Journal":
+                    $isInvolvedIn->setRole($faker->randomElement($array = array ('rédacteur','producteur'))); 
+                    break;
+                case "App\Entity\Book":
+                    $isInvolvedIn->setRole($faker->randomElement($array = array ('éditeur','illustrateur','auteur'))); 
+                    break;
+                case "App\Entity\EBook":
+                    $isInvolvedIn->setRole($faker->randomElement($array = array ('narrateur','auteur','illustrateur'))); 
+                    break;
+
+            }
+            $isInvolvedIn->setAuthor($authorRep->find($faker->numberBetween($min = 0, $max = 100)));
             $manager->persist($isInvolvedIn);
         }
         $manager->flush();
@@ -157,10 +186,10 @@ class AppFixtures extends Fixture
         // on créé 100 maintenance
         for ($i = 0; $i < 100; $i++) {
             $maintenance = new Maintenance();
-            $maintenance->setStatus($faker->firstName($gender = 'male'|'female') . $faker->lastName);
-            $maintenance->setMaintenanceDate($faker->firstName($gender = 'male'|'female'));
-            $maintenance->setemployee($faker->lastName);
-            $maintenance->setDocument($faker->password);
+            $maintenance->setStatus($faker->randomElement($array = array ('à changer','endommagé','correct','neuf')));
+            $maintenance->setMaintenanceDate($faker->dateTimeBetween($startDate = '- 2 years', $endDate = 'now', $timezone = null));
+            $maintenance->setemployee($employeeRep->find($faker->numberBetween($min = 100, $max = 200)));
+            $maintenance->setDocument($docRep->find($faker->numberBetween($min = 0, $max = 500)));
             $manager->persist($maintenance);
         }
         $manager->flush();
