@@ -22,9 +22,21 @@ class IsInvolvedInType extends AbstractType
                         'Scénariste' => 'scenariste',
                         'Réalisateur' => 'realisateur',
                     ],
+                    'Musique' => [
+                        'Chanteur' => 'chanteur',
+                        'Compositeur' => 'compositeur',
+                        'Musicien' => 'musicien',
+                    ],
                     'Livre' => [
                         'Auteur' => 'auteur',
+                        'Editeur' => 'editeur',
+                        'Illustrateur' => 'illustrateur',
+                        'Narrateur' => 'narrateur'
                     ],
+                    'Journal' => [
+                        'Rédacteur' => 'redacteur',
+                        'Producteur' => 'producteur',
+                    ]
                 ],
             ])
             ->add('document')
