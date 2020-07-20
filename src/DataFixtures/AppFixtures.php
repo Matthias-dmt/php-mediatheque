@@ -13,6 +13,12 @@ use App\Entity\Journal;
 use App\Entity\Member;
 use App\Entity\Employee;
 use App\Entity\User;
+use App\Entity\Maintenance;
+use App\Entity\Participates;
+use App\Entity\IsInvolvedIn;
+
+
+
 
 use Faker;
 
@@ -111,14 +117,47 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        // on créé 10 employées
-        for ($i = 0; $i < 10; $i++) {
+        // on créé 100 employées
+        for ($i = 0; $i < 100; $i++) {
             $employee = new Employee();
             $employee->setPseudo($faker->firstName($gender = 'male'|'female') . $faker->lastName);
             $employee->setFirstName($faker->firstName($gender = 'male'|'female'));
             $employee->setLastName($faker->lastName);
             $employee->setPassword($faker->password);
             $manager->persist($employee);
+        }
+        $manager->flush();
+
+        // on créé 100 participates
+        for ($i = 0; $i < 100; $i++) {
+            $participates = new Participates();
+            $participates->setPseudo($faker->firstName($gender = 'male'|'female') . $faker->lastName);
+            $participates->setFirstName($faker->firstName($gender = 'male'|'female'));
+            $participates->setLastName($faker->lastName);
+            $participates->setPassword($faker->password);
+            $manager->persist($participates);
+        }
+        $manager->flush();
+
+        // on créé 100 IsInvolvdIn
+        for ($i = 0; $i < 100; $i++) {
+            $isInvolvedIn = new IsInvolvedIn();
+            $isInvolvedIn->setPseudo($faker->firstName($gender = 'male'|'female') . $faker->lastName);
+            $isInvolvedIn->setFirstName($faker->firstName($gender = 'male'|'female'));
+            $isInvolvedIn->setLastName($faker->lastName);
+            $isInvolvedIn->setPassword($faker->password);
+            $manager->persist($isInvolvedIn);
+        }
+        $manager->flush();
+
+        // on créé 100 maintenance
+        for ($i = 0; $i < 100; $i++) {
+            $maintenance = new Maintenance();
+            $maintenance->setPseudo($faker->firstName($gender = 'male'|'female') . $faker->lastName);
+            $maintenance->setFirstName($faker->firstName($gender = 'male'|'female'));
+            $maintenance->setLastName($faker->lastName);
+            $maintenance->setPassword($faker->password);
+            $manager->persist($maintenance);
         }
         $manager->flush();
     }
