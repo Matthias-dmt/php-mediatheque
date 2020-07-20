@@ -144,7 +144,7 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         // on créé 100 meet up
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $meetUp = new MeetUp();
             $meetUp->setEmployee($employeeRep->find($faker->numberBetween($min = 100, $max = 200)));
             $meetUp->setAuthor($authorRep->find($faker->numberBetween($min = 1, $max = 100)));
