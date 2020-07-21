@@ -24,13 +24,13 @@ class IsInvolvedIn
     private $role;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Document::class)
+     * @ORM\ManyToOne(targetEntity=Document::class, inversedBy="isInvolvedIns")
      * @ORM\JoinColumn(nullable=false)
      */
     private $document;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Author::class)
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="isInvolvedIns")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
