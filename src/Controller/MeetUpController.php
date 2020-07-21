@@ -48,18 +48,7 @@ class MeetUpController extends AbstractController
         ]);
     }
 
-        /**
-     * @Route("/nextfive", name="meet_up_nextfive")
-     */
-    public function nextFiveMeetupRequest(MeetUpRepository $mur){
 
-
-        return $this->render('meet_up/next_five.html.twig', [
-            'nextfives' => $mur->nextFiveMeetup(),
-        ]);
-
-
-    }
 
     /**
      * @Route("/{id}", name="meet_up_show", methods={"GET"})

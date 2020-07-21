@@ -72,33 +72,3 @@ class MeetUpRepository extends ServiceEntityRepository
     ;
 }
 }
-
-
-// public function listMemberRegLastMonth()
-// {
-//     $month = new \DateInterval('P1M');
-//     $date = new \DateTime();
-//     $currentDate = $date->format('Y-m-d H:i:s');
-//     $oneMonthBefore = $date->sub($month);
-
-//     $listMemberRegLastMonth = $this->memberRep->listMemberRegisteredLastMonth($currentDate, $oneMonthBefore);
-    
-    
-//     return $this->render('admin/listMemberRegLastMonth.html.twig', [
-//         'listMemberRegLastMonth' => $listMemberRegLastMonth,
-//     ]);
-// }
-
-// public function listMemberRegisteredLastMonth($date, $oneMonthBefore)
-//     {
-//         return $this->createQueryBuilder('m')
-//             ->andWhere('m.membershipDate >= :oneMonthBefore')
-//             ->andWhere('m.membershipDate <= :date')
-//             ->setParameter('date', $date)
-//             ->setParameter('oneMonthBefore', $oneMonthBefore)
-//             ->orderBy('m.id', 'ASC')
-//             ->setMaxResults(25)
-//             ->getQuery()
-//             ->getResult()
-//         ;
-//     }

@@ -1,0 +1,9 @@
+<section class="card m-3 p-3 w" style="width: auto;">
+    <h5 class="card-title">Les prochains évenements</h5>
+    <ul class="list-group list-group-flush">
+    {% for nextfive in nextfives %}
+        <li class="list-group-item"><a href="{{ path('meet_up_show', {'id': nextfive.id}) }}">{{nextfive.author}} {{nextfive.date|date("Y-m-d") }}</a></li>
+    {% endfor %}
+    </ul>
+</section>
+

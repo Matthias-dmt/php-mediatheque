@@ -7,8 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Author;
 use App\Entity\Member;
 use App\Entity\Borrowing;
-
-
+use App\Entity\MeetUp;
 
 class AdminController extends AbstractController
 {
@@ -63,4 +62,16 @@ class AdminController extends AbstractController
             'documents' => $documents
         ]);
     }
+
+    public function nextFiveMeetup(){
+
+        $nextfives = $this->getDoctrine()->getRepository(MeetUp::class)->nextFiveMeetup();
+
+        return $this->render('admin/nextFiveMeetUp.html.twig', [
+            'nextfives' => $nextfives,
+        ]);
+
+
+    }
+
 }
