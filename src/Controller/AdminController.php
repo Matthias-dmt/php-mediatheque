@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Author;
 use App\Entity\Member;
+use App\Entity\Document;
 
 class AdminController extends AbstractController
 {
@@ -40,6 +41,15 @@ class AdminController extends AbstractController
         
         return $this->render('admin/listMemberRegLastMonth.html.twig', [
             'listMemberRegLastMonth' => $listMemberRegLastMonth,
+        ]);
+    }
+
+    public function lastDocumentsAdded()
+    {
+        $documents = $this->getDoctrine()->getRepository(Document::class)->lastDocumentsAdded();
+
+        return $this->render('admin/lastDocumentsAdded.html.twig', [
+            'documents' => $documents
         ]);
     }
 }
