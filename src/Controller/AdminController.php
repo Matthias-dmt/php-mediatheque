@@ -8,6 +8,8 @@ use App\Entity\Author;
 use App\Entity\Member;
 use App\Entity\Borrowing;
 use App\Entity\MeetUp;
+use App\Entity\Document;
+
 
 class AdminController extends AbstractController
 {

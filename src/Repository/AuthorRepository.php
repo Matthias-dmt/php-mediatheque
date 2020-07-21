@@ -23,7 +23,7 @@ class AuthorRepository extends ServiceEntityRepository
     public function findMostAuthorsInCatalog()
     {
         return $this->createQueryBuilder('a')
-            ->select('count(a.id) as c, a.lastName, a.firstName')
+            ->select('count(a.id) as c, a.id, a.lastName, a.firstName')
             ->innerJoin('a.isInvolvedIns', 'i')
             ->groupBy('a.id')
             ->orderBy('c', 'DESC')

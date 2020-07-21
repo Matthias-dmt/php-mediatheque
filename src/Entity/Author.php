@@ -36,10 +36,15 @@ class Author
      */
     private $lastName;
 
-        /**
+    /**
      * @ORM\OneToMany(targetEntity=IsInvolvedIn::class, mappedBy="author")
      */
     private $isInvolvedIns;
+
+    public function __construct()
+    {
+        $this->isInvolvedIns = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
