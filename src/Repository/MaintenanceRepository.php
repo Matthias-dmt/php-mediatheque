@@ -47,4 +47,24 @@ class MaintenanceRepository extends ServiceEntityRepository
         ;
     }
     */
+    // La liste des livres/documents à restaurer
+
+    //  /**
+    //  * @return Maintenance[] Returns an array of Maintenance objects
+    //  */
+    public function docEndommage()
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.status = :chang or m.status = :endo')
+            ->setParameter('endo', 'à changer')
+            ->setParameter('chang', 'endommagé')
+            ->orderBy('m.status')
+            ->getQuery()
+            ->getResult()
+
+        ;
+    }
+
+
+
 }
