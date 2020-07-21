@@ -1,0 +1,35 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block title %}Livre endommagé{% endblock %}
+
+    {% block main %}
+
+    <style>
+    td, th{padding: 10px;}
+    </style>
+<table>
+<thead>
+            <tr>
+                <th>Nom du livre</th>
+                <th>État</th>
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+
+{% for maintenance in maint %}
+
+    <tr>
+        <td>{{ maintenance.document }}</td>
+        <td>{{ maintenance.status }}</td>
+        <td>
+                    <a href="{{ path('maintenance_show', {'id': maintenance.id}) }}">show</a>
+                    <a href="{{ path('maintenance_edit', {'id': maintenance.id}) }}">edit</a>
+        </td>
+    </tr>
+
+{% endfor %}
+</table>
+
+
+{% endblock %}

@@ -21,7 +21,10 @@ use App\Entity\Maintenance;
 use App\Entity\Participates;
 use App\Entity\IsInvolvedIn;
 use App\Entity\MeetUp;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 06231e73de9f5cc70bc7bc236389a9929ab466eb
 use Faker;
 
 class AppFixtures extends Fixture

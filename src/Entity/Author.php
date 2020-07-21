@@ -36,6 +36,11 @@ class Author
      */
     private $lastName;
 
+        /**
+     * @ORM\OneToMany(targetEntity=IsInvolvedIn::class, mappedBy="author")
+     */
+    private $isInvolvedIns;
+
     public function getId(): ?int
     {
         return $this->id;

@@ -19,6 +19,20 @@ class AuthorRepository extends ServiceEntityRepository
         parent::__construct($registry, Author::class);
     }
 
+    // SELECT count(*) as c, last_name, first_name FROM author INNER JOIN is_involved_in ON author.id = is_involved_in.author_id GROUP BY author.id ORDER BY c DESC LIMIT 5
+    public function findMostAuthorsInCatalog()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('count(a.id) as c, a.lastName, a.firstName')
+            ->innerJoin('a.isInvolvedIns', 'i')
+            ->groupBy('a.id')
+            ->orderBy('c', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Author[] Returns an array of Author objects
     //  */
