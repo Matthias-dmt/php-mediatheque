@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 
-
 {% block title %}
     Admin
 {% endblock %}
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="{{ asset('css/styleAdmin.css') }}" rel="stylesheet" />
     {% endblock %}
-
 
 
 {% block body %}
@@ -63,14 +61,6 @@
     </nav>
     {% endblock %}
     {% block main %}
-    <div class="card" style="width: 18rem;">
-        <h5 class="card-title">Auteurs les plus présents dans le catalogue</h5>
-        <ul class="list-group list-group-flush">
-        {% for author in authors %}
-            <li class="list-group-item">{{author.lastName}} {{author.firstName}} - {{author.c}} fois</li>
-        {% endfor %}
-      </ul>
-    </div>
     {% endblock %}
 
 {% endblock %}
