@@ -91,4 +91,19 @@ class MaintenanceController extends AbstractController
 
         return $this->redirectToRoute('maintenance_index');
     }
+
+
+    /**
+     * @Route("/maintenance/damageddoc", name="damaged_doc")
+     */
+    public function DamagedControl(MaintenanceRepository $mr)
+    {
+        return $this->render('maintenance/damagedDoc.html.twig', [
+            'damagedocs' => $mr->docEndommage(),
+
+        ]);
+    }
+
+
+
 }

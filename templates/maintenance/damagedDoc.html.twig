@@ -17,14 +17,14 @@
             </tr>
         </thead>
 
-{% for maintenance in maint %}
+{% for damagedoc in damagedocs %}
 
     <tr>
-        <td>{{ maintenance.document }}</td>
-        <td>{{ maintenance.status }}</td>
+        <td>{{ damagedoc.document }}</td>
+        <td>{{ damagedoc.status }}</td>
         <td>
-                    <a href="{{ path('maintenance_show', {'id': maintenance.id}) }}">show</a>
-                    <a href="{{ path('maintenance_edit', {'id': maintenance.id}) }}">edit</a>
+                    <a href="{{ path('maintenance_show', {'id': damagedoc.id}) }}">show</a>
+                    <a href="{{ path('maintenance_edit', {'id': damagedoc.id}) }}">edit</a>
         </td>
     </tr>
 
