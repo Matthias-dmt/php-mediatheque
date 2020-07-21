@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\MemberRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Mapping as ORM;
+// use Doctrine\ORM\EntityManagerInterface;
+
 
 /**
  * @ORM\Entity(repositoryClass=MemberRepository::class)
@@ -37,6 +40,13 @@ class Member extends User
      * @ORM\Column(type="datetime")
      */
     private $membershipDate;
+
+    // private $manager;
+
+    // public function __construct(EntityManagerInterface $entityManager)
+    // {
+    //     $this->manager = $entityManager;
+    // }
 
     public function getId(): ?int
     {
@@ -90,4 +100,6 @@ class Member extends User
 
         return $this;
     }
+
+    
 }

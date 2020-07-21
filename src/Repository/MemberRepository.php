@@ -19,22 +19,24 @@ class MemberRepository extends ServiceEntityRepository
         parent::__construct($registry, Member::class);
     }
 
-    // /**
-    //  * @return Member[] Returns an array of Member objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Member[] Returns an array of Member objects
+     */
+    
+    public function listMemberRegisteredLastMonth($date, $oneMonthBefore)
     {
         return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('m.membershipDate >= :oneMonthBefore')
+            ->andWhere('m.membershipDate <= :date')
+            ->setParameter('date', $date)
+            ->setParameter('oneMonthBefore', $oneMonthBefore)
             ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(25)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Member

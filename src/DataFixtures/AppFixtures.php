@@ -21,10 +21,7 @@ use App\Entity\Maintenance;
 use App\Entity\Participates;
 use App\Entity\IsInvolvedIn;
 use App\Entity\MeetUp;
-<<<<<<< HEAD
 
-=======
->>>>>>> 49544e6b6c46fb3417beb5114098575cecd2a1c7
 use Faker;
 
 class AppFixtures extends Fixture
@@ -41,7 +38,7 @@ class AppFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
         // On configure dans quelles langues nous voulons nos données
-        // $faker = Faker\Factory::create('fr_FR');
+        $faker = Faker\Factory::create('fr_FR');
 
         $docRep = $this->manager->getRepository(Document::class);
         $userRep = $this->manager->getRepository(User::class);

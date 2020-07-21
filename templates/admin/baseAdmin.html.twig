@@ -63,6 +63,11 @@
     </nav>
     {% endblock %}
     {% block main %}
+        <section>
+        {{ render(controller(
+            'App\\Controller\\ListMemberRegLastMonthController::index'
+        )) }}
+    </section>
     {% endblock %}
 
 {% endblock %}
