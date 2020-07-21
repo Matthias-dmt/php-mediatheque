@@ -27,9 +27,6 @@ class ListMemberRegLastMonthController extends AbstractController
         $date = new \DateTime();
         $currentDate = $date->format('Y-m-d H:i:s');
         $oneMonthBefore = $date->sub($month);
-        var_dump($currentDate);
-        var_dump($oneMonthBefore);
-
 
         $listMemberRegLastMonth = $this->memberRep->listMemberRegisteredLastMonth($currentDate, $oneMonthBefore);
         

@@ -1,0 +1,9 @@
+<div class="card" style="width: 18rem;">
+    <h5 class="card-title">Auteurs les plus présents dans le catalogue</h5>
+    <ul class="list-group list-group-flush">
+    {% for author in authors %}
+        <li class="list-group-item">{{author.lastName}} {{author.firstName}} - {{author.c}} fois</li>
+    {% endfor %}
+    </ul>
+</div>
+

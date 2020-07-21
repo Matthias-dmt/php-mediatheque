@@ -13,9 +13,16 @@ class AdminController extends AbstractController
      */
     public function index()
     {
+        return $this->render('admin/baseAdmin.html.twig', [
+            'controller_name' => 'AdminController',
+        ]);
+    }
+
+    public function findMostAuthorsInCatalog()
+    {
         $authors = $this->getDoctrine()->getRepository(Author::class)->findMostAuthorsInCatalog();
 
-        return $this->render('admin/statsAdmin.html.twig', [
+        return $this->render('admin/findMostAuthorsInCatalog.html.twig', [
             'authors' => $authors
         ]);
     }

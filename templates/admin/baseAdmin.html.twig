@@ -61,11 +61,14 @@
     </nav>
     {% endblock %}
     {% block main %}
-        <section>
+    <div class="container-fluid offset-1 col-10">
         {{ render(controller(
             'App\\Controller\\ListMemberRegLastMonthController::index'
         )) }}
-    </section>
+        {{ render(controller(
+            'App\\Controller\\AdminController::findMostAuthorsInCatalog'
+        )) }}
+    </div>
     {% endblock %}
 
 {% endblock %}
