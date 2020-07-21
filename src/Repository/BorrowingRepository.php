@@ -19,6 +19,19 @@ class BorrowingRepository extends ServiceEntityRepository
         parent::__construct($registry, Borrowing::class);
     }
 
+    public function listDocMostBor()
+    {
+        return $this->createQueryBuilder('b')
+            ->select('count(b.document) as docId, d.title')
+            ->innerJoin('b.document', 'd')
+            ->groupBy('b.document')
+            ->orderBy('docId', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Borrowing[] Returns an array of Borrowing objects
     //  */
