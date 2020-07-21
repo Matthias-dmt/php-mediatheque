@@ -61,10 +61,9 @@
     </nav>
     {% endblock %}
     {% block main %}
-    <main class="container-fluid offset-1 col-10">
+    <div class="container-fluid offset-1 col-10">
         <h1>Accueil</h1>
         <div class="row">
-        
             {{ render(controller(
                 'App\\Controller\\AdminController::ListMemberRegLastMonth'
             )) }}
@@ -74,8 +73,11 @@
             {{ render(controller(
                 'App\\Controller\\AdminController::listDocMostBor'
             )) }}
+            {{ render(controller(
+                'App\\Controller\\AdminController::lastDocumentsAdded'
+            )) }}
         </div>
-    </main>
+    </div>
     {% endblock %}
 
 {% endblock %}

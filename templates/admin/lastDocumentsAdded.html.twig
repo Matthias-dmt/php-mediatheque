@@ -1,9 +1,9 @@
-<div class="card mb-3 p-3" style="width: 18rem;">
+<section class="card m-3 p-3" style="width: 18rem;">
     <h5 class="card-title">Derniers documents ajoutés</h5>
     <ul class="list-group list-group-flush">
     {% for document in documents %}
-        <li class="list-group-item">{{document.title}} - {{document.codeOeuvre}} </li>
+        <li class="list-group-item"><a href="#">{{document.title}}</a> </li>
     {% endfor %}
     </ul>
-</div>
+</section>
 

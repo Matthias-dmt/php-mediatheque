@@ -2,7 +2,7 @@
     <h5 class="card-title">Adhérents inscrits le mois derniers</h5>
     <ul class="list-group list-group-flush">
     {% for member in listMemberRegLastMonth %}
-         <li class="list-group-item">{{member.lastName}} {{member.firstName}}</li>
+         <li class="list-group-item"><a href="{{ path('member_show', {id: member.id}) }}">{{member.lastName}} {{member.firstName}}</a></li>
     {% endfor %}
     </ul>
 </section>
