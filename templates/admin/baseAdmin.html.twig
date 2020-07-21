@@ -61,7 +61,6 @@
     </nav>
     {% endblock %}
     {% block main %}
-<<<<<<< HEAD
     <main class="container-fluid offset-1 col-10">
         <h1>Accueil</h1>
         <div class="row">
@@ -77,25 +76,6 @@
             )) }}
         </div>
     </main>
-=======
-    <div class="row">
-        <div class="col-2">
-            {{ render(controller(
-                'App\\Controller\\AdminController::ListMemberRegLastMonth'
-            )) }}
-        </div>
-        <div class="col-2">
-            {{ render(controller(
-                'App\\Controller\\AdminController::findMostAuthorsInCatalog'
-            )) }}
-        </div>
-        <div class="col-2">
-            {{ render(controller(
-                'App\\Controller\\AdminController::lastDocumentsAdded'
-            )) }}
-        </div>
-    </div>
->>>>>>> 93d62b9b947290046a359ac852cdb2e8f08ef5a3
     {% endblock %}
 
 {% endblock %}

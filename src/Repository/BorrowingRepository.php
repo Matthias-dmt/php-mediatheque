@@ -26,7 +26,7 @@ class BorrowingRepository extends ServiceEntityRepository
             ->innerJoin('b.document', 'd')
             ->groupBy('b.document')
             ->orderBy('docId', 'DESC')
-            ->setMaxResults(10)
+            ->setMaxResults(5)
             ->getQuery()
             ->getResult()
         ;

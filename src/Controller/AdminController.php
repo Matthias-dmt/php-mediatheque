@@ -6,20 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Author;
 use App\Entity\Member;
-<<<<<<< HEAD
 use App\Entity\Borrowing;
 
 
 
 class AdminController extends AbstractController
 {
-=======
-use App\Entity\Document;
-
-class AdminController extends AbstractController
-{
-
->>>>>>> 93d62b9b947290046a359ac852cdb2e8f08ef5a3
     /**
      * @Route("/admin", name="admin_index")
      */
@@ -46,12 +38,8 @@ class AdminController extends AbstractController
         $currentDate = $date->format('Y-m-d H:i:s');
         $oneMonthBefore = $date->sub($month);
 
-<<<<<<< HEAD
         $members = $this->getDoctrine()->getRepository(Member::class)->listMemberRegisteredLastMonth($currentDate, $oneMonthBefore);
 
-=======
-        $listMemberRegLastMonth = $this->getDoctrine()->getRepository(Member::class)->listMemberRegisteredLastMonth($currentDate, $oneMonthBefore);
->>>>>>> 93d62b9b947290046a359ac852cdb2e8f08ef5a3
         
         return $this->render('admin/listMemberRegLastMonth.html.twig', [
             'listMemberRegLastMonth' => $members,
