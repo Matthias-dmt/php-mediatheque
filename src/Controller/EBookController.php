@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/ebook")
@@ -18,10 +19,15 @@ class EBookController extends AbstractController
     /**
      * @Route("/", name="e_book_index", methods={"GET"})
      */
-    public function index(EBookRepository $eBookRepository): Response
+    public function index(EBookRepository $eBookRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $e_books = $paginator->paginate(
+            $eBookRepository->findAll(), // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            25 // Nombre de résultats par page
+        );
         return $this->render('e_book/index.html.twig', [
-            'e_books' => $eBookRepository->findAll(),
+            'e_books' => $e_books,
         ]);
     }
 

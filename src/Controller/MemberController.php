@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/member")
@@ -18,10 +19,15 @@ class MemberController extends AbstractController
     /**
      * @Route("/", name="member_index", methods={"GET"})
      */
-    public function index(MemberRepository $memberRepository): Response
+    public function index(MemberRepository $memberRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $members = $paginator->paginate(
+            $memberRepository->findAll(), // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            25 // Nombre de résultats par page
+        );
         return $this->render('member/index.html.twig', [
-            'members' => $memberRepository->findAll(),
+            'members' => $members,
         ]);
     }
 

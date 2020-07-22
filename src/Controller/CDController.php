@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/cd")
@@ -18,10 +19,15 @@ class CDController extends AbstractController
     /**
      * @Route("/", name="cd_index", methods={"GET"})
      */
-    public function index(CDRepository $cDRepository): Response
+    public function index(CDRepository $cDRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $cds = $paginator->paginate(
+            $cDRepository->findAll(), // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            25 // Nombre de résultats par page
+        );
         return $this->render('cd/index.html.twig', [
-            'cds' => $cDRepository->findAll(),
+            'cds' => $cds,
         ]);
     }
 

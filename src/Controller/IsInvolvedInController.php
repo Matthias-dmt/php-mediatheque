@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/isinvolvedin")
@@ -18,10 +19,15 @@ class IsInvolvedInController extends AbstractController
     /**
      * @Route("/", name="is_involved_in_index", methods={"GET"})
      */
-    public function index(IsInvolvedInRepository $isInvolvedInRepository): Response
+    public function index(IsInvolvedInRepository $isInvolvedInRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $is_involved_ins = $paginator->paginate(
+            $isInvolvedInRepository->findAll(), // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            25 // Nombre de résultats par page
+        );
         return $this->render('is_involved_in/index.html.twig', [
-            'is_involved_ins' => $isInvolvedInRepository->findAll(),
+            'is_involved_ins' => $is_involved_ins,
         ]);
     }
 

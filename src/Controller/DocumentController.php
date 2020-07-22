@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/document")
@@ -19,10 +20,15 @@ class DocumentController extends AbstractController
     /**
      * @Route("/", name="document_index", methods={"GET"})
      */
-    public function index(DocumentRepository $documentRepository): Response
+    public function index(DocumentRepository $documentRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $documents = $paginator->paginate(
+            $documentRepository->findAll(), // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            25 // Nombre de résultats par page
+        );
         return $this->render('document/index.html.twig', [
-            'documents' => $documentRepository->findAll(),
+            'documents' => $documents,
         ]);
     }
 

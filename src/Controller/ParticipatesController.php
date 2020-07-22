@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/participates")
@@ -18,10 +19,15 @@ class ParticipatesController extends AbstractController
     /**
      * @Route("/", name="participates_index", methods={"GET"})
      */
-    public function index(ParticipatesRepository $participatesRepository): Response
+    public function index(ParticipatesRepository $participatesRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        return $this->render('participates/index.html.twig', [
-            'participates' => $participatesRepository->findAll(),
+        $participates = $paginator->paginate(
+            $participatesRepository->findAll(), // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            25 // Nombre de résultats par page
+        );
+        return $this->render('participate/index.html.twig', [
+            'participates' => $participates,
         ]);
     }
 

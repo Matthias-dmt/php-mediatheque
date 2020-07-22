@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/maintenance")
@@ -18,10 +19,15 @@ class MaintenanceController extends AbstractController
     /**
      * @Route("/", name="maintenance_index", methods={"GET"})
      */
-    public function index(MaintenanceRepository $maintenanceRepository): Response
+    public function index(MaintenanceRepository $maintenanceRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $maintenances = $paginator->paginate(
+            $maintenanceRepository->findAll(), // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            25 // Nombre de résultats par page
+        );
         return $this->render('maintenance/index.html.twig', [
-            'maintenances' => $maintenanceRepository->findAll(),
+            'maintenances' => $maintenances,
         ]);
     }
 

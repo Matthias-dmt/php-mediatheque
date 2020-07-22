@@ -2,34 +2,36 @@
 
 {% block title %}Livre endommagé{% endblock %}
 
-    {% block main %}
+{% block main %}
+<div class="container-fluid offset-1 col-10">
 
-    <style>
-    td, th{padding: 10px;}
-    </style>
-<table>
-<thead>
+    <h1 class="mb-3">Livre endommagé</h1>
+    <table class="table">
+        <thead>
             <tr>
                 <th>Nom du livre</th>
                 <th>État</th>
                 <th>Actions</th>
-
             </tr>
         </thead>
-
-{% for damagedoc in damagedocs %}
-
-    <tr>
-        <td>{{ damagedoc.document }}</td>
-        <td>{{ damagedoc.status }}</td>
-        <td>
+        <tbody>
+        {% for damagedoc in damagedocs %}
+            <tr>
+                <td>{{ damagedoc.document }}</td>
+                <td>{{ damagedoc.status }}</td>
+                <td>
                     <a href="{{ path('maintenance_show', {'id': damagedoc.id}) }}">show</a>
                     <a href="{{ path('maintenance_edit', {'id': damagedoc.id}) }}">edit</a>
-        </td>
-    </tr>
-
-{% endfor %}
-</table>
-
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}
+

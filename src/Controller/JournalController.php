@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/journal")
@@ -19,10 +20,15 @@ class JournalController extends AbstractController
     /**
      * @Route("/", name="journal_index", methods={"GET"})
      */
-    public function index(JournalRepository $journalRepository): Response
+    public function index(JournalRepository $journalRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $journals = $paginator->paginate(
+            $journalRepository->findAll(), // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            25 // Nombre de résultats par page
+        );
         return $this->render('journal/index.html.twig', [
-            'journals' => $journalRepository->findAll(),
+            'journals' => $journals,
         ]);
     }
 
