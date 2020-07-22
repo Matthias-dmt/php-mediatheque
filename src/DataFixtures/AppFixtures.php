@@ -128,6 +128,7 @@ class AppFixtures extends Fixture
             $member->setCity($faker->city);
             $member->setAdress($faker->address);
             $member->setMembershipDate($faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = null));
+            $member->setEmail($faker->freeEmail);
             $manager->persist($member);
         }
         $manager->flush();
@@ -139,6 +140,7 @@ class AppFixtures extends Fixture
             $employee->setFirstName($faker->firstName($gender = 'male' | 'female'));
             $employee->setLastName($faker->lastName);
             $employee->setPassword($faker->password);
+            $employee->setEmail($faker->freeEmail);
             $manager->persist($employee);
         }
         $manager->flush();
