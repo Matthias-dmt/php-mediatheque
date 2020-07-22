@@ -4,7 +4,7 @@
     </div>
     <ul class="list-group list-group-flush">
     {% for document in documents %}
-        <li class="list-group-item"><a href="#">{{document.title}}</a> </li>
+        <li class="list-group-item"><a href="{{ path('document_show', {id: document.id}) }}">{{document.title}}</a> </li>
     {% endfor %}
     </ul>
 </section>
