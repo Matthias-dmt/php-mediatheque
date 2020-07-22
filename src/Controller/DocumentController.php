@@ -27,32 +27,6 @@ class DocumentController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="document_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $document = new Document();
-
-        $form = $this->createForm(DocumentType::class, $document);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($document);
-            $entityManager->flush();
-            
-
-            return $this->redirectToRoute('document_index');
-        }
-
-        return $this->render('document/new.html.twig', [
-            'document' => $document,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="document_show", methods={"GET"})
      */
     public function show(Document $document): Response
@@ -62,37 +36,63 @@ class DocumentController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="document_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Document $document): Response
-    {
-        $form = $this->createForm(DocumentType::class, $document);
-        $form->handleRequest($request);
+    // /**
+    //  * @Route("/new", name="document_new", methods={"GET","POST"})
+    //  */
+    // public function new(Request $request): Response
+    // {
+    //     $document = new Document();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+    //     $form = $this->createForm(DocumentType::class, $document);
+    //     $form->handleRequest($request);
 
-            return $this->redirectToRoute('document_index');
-        }
+    //     if ($form->isSubmitted() && $form->isValid()) {
+            
+    //         $entityManager = $this->getDoctrine()->getManager();
+    //         $entityManager->persist($document);
+    //         $entityManager->flush();
+            
 
-        return $this->render('document/edit.html.twig', [
-            'document' => $document,
-            'form' => $form->createView(),
-        ]);
-    }
+    //         return $this->redirectToRoute('document_index');
+    //     }
 
-    /**
-     * @Route("/{id}", name="document_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Document $document): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$document->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($document);
-            $entityManager->flush();
-        }
+    //     return $this->render('document/new.html.twig', [
+    //         'document' => $document,
+    //         'form' => $form->createView(),
+    //     ]);
+    // }
 
-        return $this->redirectToRoute('document_index');
-    }
+    // /**
+    //  * @Route("/{id}/edit", name="document_edit", methods={"GET","POST"})
+    //  */
+    // public function edit(Request $request, Document $document): Response
+    // {
+    //     $form = $this->createForm(DocumentType::class, $document);
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $this->getDoctrine()->getManager()->flush();
+
+    //         return $this->redirectToRoute('document_index');
+    //     }
+
+    //     return $this->render('document/edit.html.twig', [
+    //         'document' => $document,
+    //         'form' => $form->createView(),
+    //     ]);
+    // }
+
+    // /**
+    //  * @Route("/{id}", name="document_delete", methods={"DELETE"})
+    //  */
+    // public function delete(Request $request, Document $document): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$document->getId(), $request->request->get('_token'))) {
+    //         $entityManager = $this->getDoctrine()->getManager();
+    //         $entityManager->remove($document);
+    //         $entityManager->flush();
+    //     }
+
+    //     return $this->redirectToRoute('document_index');
+    // }
 }

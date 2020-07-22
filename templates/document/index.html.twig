@@ -1,11 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/baseAdmin.html.twig' %}
 
 {% block title %}Document index{% endblock %}
 
-{% block body %}
-    <h1>Document index</h1>
+{% block main %}
+<div class="container-fluid offset-1 col-10">
 
-    <table class="table">
+    <h1 class="mb-3">Document index</h1>
+
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
@@ -26,7 +28,6 @@
                 <td>{{ document.codeOeuvre }}</td>
                 <td>
                     <a href="{{ path('document_show', {'id': document.id}) }}">show</a>
-                    <a href="{{ path('document_edit', {'id': document.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -36,8 +37,6 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('document_new') }}">Create new</a><br>
 
     <a href="{{ path('admin_index') }}">back to admin panel </a>
 {% endblock %}
