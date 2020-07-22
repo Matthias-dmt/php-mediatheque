@@ -1,8 +1,13 @@
-<section class="card m-3 p-3 offset-0 col-4" style="width: 18rem;">
-    <h5 class="card-title">List of documents most borrowing</h5>
+<section class="card m-3 p-0 offset-0 col-4" style="width: 18rem;">
+    <div class="card-header p-3">
+        <h5 class="card-title">List of documents most borrowing</h5>
+    </div>
     <ul class="list-group list-group-flush">
     {% for document in documents %}
-         <li class="list-group-item"><p><span>Number of borrow</span> : {{ document.docId }}</p><p><span> title of document</span> : {{ document.title }}</p></li>
+         <li class="list-group-item">
+            <p><span>Number of borrow</span> : {{ document.docId }}</p>
+            <p><span> title of document</span> : {{ document.title }}</p>
+        </li>
     {% endfor %}
     </ul>
 </section>

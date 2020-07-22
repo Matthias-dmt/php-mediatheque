@@ -1,5 +1,7 @@
-<div class="card mb-3 p-3" style="width: 18rem;">
-    <h5 class="card-title">Derniers documents ajoutés</h5>
+<div class="card mb-3 p-0" style="width: 18rem;">
+    <div class="card-header p-3">
+        <h5 class="card-title">Derniers documents ajoutés</h5>
+    </div>
     <ul class="list-group list-group-flush">
     {% for document in documents %}
         <li class="list-group-item">{{document.title}} - {{document.codeOeuvre}} </li>
