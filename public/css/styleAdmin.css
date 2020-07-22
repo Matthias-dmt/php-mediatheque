@@ -8,7 +8,26 @@ p {
 }
 
 
-span {
-    padding-bottom: 3px;
-    border-bottom: 1px solid rgb(185, 185, 185);
+div.pagination{
+    justify-content: center;
 }
+div.pagination span a, div.pagination span.current{
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+div.pagination span.page a:hover{
+    background-color: lightgray;
+}
+
+div.pagination span a{
+    text-decoration: none;
+}
+
+
+div.pagination span.current{
+    background-color: #4CAF50;
+    color: white;
+  }
