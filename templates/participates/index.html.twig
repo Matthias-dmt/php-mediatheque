@@ -1,9 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/baseAdmin.html.twig' %}
 
 {% block title %}Participates index{% endblock %}
 
-{% block body %}
-    <h1>Participates index</h1>
+{% block main %}
+<div class="container-fluid offset-1 col-10">
+    <h1 class="mb-3">Participates index</h1>
 
     <table class="table table-striped">
         <thead>
@@ -38,5 +39,5 @@
     <a href="{{ path('participates_new') }}">Create new</a><br>
 
     <a href="{{ path('admin_index') }}">back to admin panel </a>
-
+</div>
 {% endblock %}

@@ -1,9 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/baseAdmin.html.twig' %}
 
 {% block title %}Participates{% endblock %}
 
-{% block body %}
-    <h1>Participates</h1>
+{% block main %}
+<div class="container-fluid offset-1 col-10">
+    <h1 class="mb-3">Participates</h1>
 
     <table class="table table-striped">
         <tbody>
@@ -31,4 +32,5 @@
     <a href="{{ path('participates_edit', {'id': participate.id}) }}">edit</a>
 
     {{ include('participates/_delete_form.html.twig') }}
+</div>
 {% endblock %}

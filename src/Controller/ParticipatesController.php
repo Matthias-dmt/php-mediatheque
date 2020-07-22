@@ -26,7 +26,7 @@ class ParticipatesController extends AbstractController
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             25 // Nombre de résultats par page
         );
-        return $this->render('participate/index.html.twig', [
+        return $this->render('participates/index.html.twig', [
             'participates' => $participates,
         ]);
     }
