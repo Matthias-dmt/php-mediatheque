@@ -22,7 +22,7 @@ class BorrowingRepository extends ServiceEntityRepository
     public function listDocMostBor()
     {
         return $this->createQueryBuilder('b')
-            ->select('count(b.document) as docId, d.title')
+            ->select('count(b.document) as docId, d.title, d.id')
             ->innerJoin('b.document', 'd')
             ->groupBy('b.document')
             ->orderBy('docId', 'DESC')
