@@ -23,6 +23,9 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin_findMostAuthorsInCatalog", name="admin_findMostAuthorsInCatalog")
+     */
     public function findMostAuthorsInCatalog()
     {
         $authors = $this->getDoctrine()->getRepository(Author::class)->findMostAuthorsInCatalog();
@@ -32,6 +35,9 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin_listMemberRegLastMonth", name="admin_listMemberRegLastMonth")
+     */
     public function listMemberRegLastMonth()
     {
         $month = new \DateInterval('P1M');
@@ -47,6 +53,9 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin_listDocMostBor", name="admin_listDocMostBor")
+     */
     public function listDocMostBor()
     {
         $documents = $this->getDoctrine()->getRepository(Borrowing::class)->listDocMostBor();
@@ -56,6 +65,9 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin_lastDocumentsAdded", name="admin_lastDocumentsAdded")
+     */
     public function lastDocumentsAdded()
     {
         $documents = $this->getDoctrine()->getRepository(Document::class)->lastDocumentsAdded();
@@ -65,6 +77,9 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin_nextFiveMeetup", name="admin_nextFiveMeetup")
+     */
     public function nextFiveMeetup(){
 
         $nextfives = $this->getDoctrine()->getRepository(MeetUp::class)->nextFiveMeetup();
