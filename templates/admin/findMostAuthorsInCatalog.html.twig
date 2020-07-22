@@ -4,7 +4,7 @@
     </div>
     <ul class="list-group list-group-flush">
     {% for author in authors %}
-        <li class="list-group-item">{{author.lastName}} {{author.firstName}} - {{author.c}} fois</li>
+        <li class="list-group-item"><a href="{{ path('author_show', {id: author.id}) }}">{{author.lastName}} {{author.firstName}} - {{author.c}} fois</a></li>
     {% endfor %}
     </ul>
 </section>

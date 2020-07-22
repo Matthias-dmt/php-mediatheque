@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\MeetUp;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,4 +48,27 @@ class MeetUpRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+// La liste des prochaines rencontres organisés avec des auteurs
+// (avec le nombre de personnes qui ont réservé)
+    /**
+     * @return MeetUp[] Returns an array of MeetUp objects
+     */
+    public function nextFiveMeetup(){
+
+    $date = new DateTime();
+    $format = $date->format('Y-m-d H:i:s');
+
+
+    return $this->createQueryBuilder('mu')
+
+        ->andWhere('mu.date >= :date')
+        ->setParameter('date', $format)
+        ->orderBy('mu.date')
+        ->setMaxResults(5)
+        ->getQuery()
+        ->getResult()
+    ;
+}
 }

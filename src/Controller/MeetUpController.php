@@ -48,6 +48,8 @@ class MeetUpController extends AbstractController
         ]);
     }
 
+
+
     /**
      * @Route("/{id}", name="meet_up_show", methods={"GET"})
      */
@@ -91,4 +93,5 @@ class MeetUpController extends AbstractController
 
         return $this->redirectToRoute('meet_up_index');
     }
+
 }

@@ -64,10 +64,10 @@ class Document
 
     public function __construct()
     {
-        $this->author = new ArrayCollection();
         $this->maintenances = new ArrayCollection();
         $this->borrowings = new ArrayCollection();
         $this->ressources = new ArrayCollection();
+        $this->isInvolvedIns = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,8 +123,6 @@ class Document
         return $this;
     }
 
-    
-
     /**
      * @return Collection|Ressources[]
      */
@@ -152,7 +150,6 @@ class Document
                 $ressources->setDocument(null);
             }
         }
-
         return $this;
     }
 
@@ -170,7 +167,6 @@ class Document
             $this->maintenances[] = $maintenance;
             $maintenance->setDocument($this);
         }
-
         return $this;
     }
 
@@ -183,7 +179,6 @@ class Document
                 $maintenance->setDocument(null);
             }
         }
-
         return $this;
     }
 
@@ -201,7 +196,6 @@ class Document
             $this->borrowings[] = $borrowing;
             $borrowing->setDocument($this);
         }
-
         return $this;
     }
 
@@ -214,7 +208,6 @@ class Document
                 $borrowing->setDocument(null);
             }
         }
-
         return $this;
     }
 
