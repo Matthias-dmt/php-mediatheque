@@ -33,6 +33,7 @@
                             <a class="dropdown-item" href="{{ path('maintenance_index') }}">Maintenance</a>
                             <a class="dropdown-item" href="{{ path('borrowing_index') }}">Emprunt</a>
                             <a class="dropdown-item" href="{{ path('meet_up_index') }}">Meet Up</a>
+                            <a class="dropdown-item" href="{{ path('upcoming_meetUp') }}">Upcoming Meet Up</a>
                             <a class="dropdown-item" href="{{ path('is_involved_in_index') }}">IsInvolvedIn</a>
                         </div>
                     </li>
@@ -88,6 +89,7 @@
                     {{ render(controller(
                         'App\\Controller\\AdminController::lastDocumentsAdded'
                     )) }}
+                    
                 </div>
             </div>
             {% endblock %}

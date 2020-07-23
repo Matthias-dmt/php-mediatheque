@@ -19,6 +19,19 @@ class ParticipatesRepository extends ServiceEntityRepository
         parent::__construct($registry, Participates::class);
     }
 
+    public function numberPlacesReserved($meetUpId)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('sum(p.places) as totalPlaces')
+            ->innerJoin('p.meetUp', 'm')
+            ->groupBy('m.id')
+            ->Where('p.meetUp = :meetUpId')
+            ->setParameter('meetUpId', $meetUpId)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     // /**
     //  * @return Participates[] Returns an array of Participates objects
     //  */
