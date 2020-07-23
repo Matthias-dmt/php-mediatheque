@@ -199,7 +199,7 @@ class AppFixtures extends Fixture
             $dateOneMonth = $cloneDate->add(new \DateInterval('P1M'));
             $borrowing->setStartDate($startdateborrowing);
             $borrowing->setExpectedReturnDate($dateOneMonth);
-            $borrowing->setEffectiveReturnDate($faker->dateTimeBetween($startDate = 'now', $endDate = '1 years', $timezone = null));
+            $borrowing->setEffectiveReturnDate($faker->randomElement($array = array($faker->dateTimeBetween($startDate = $startdateborrowing, $endDate = '2 month', $timezone = null), NULL)));
             $borrowing->setMember($memberRep->find($faker->numberBetween($min = 1, $max = $nbMember)));
             $borrowing->setDocument($docRep->find($faker->numberBetween($min = 1, $max = $nbDocuments)));
             $manager->persist($borrowing);
