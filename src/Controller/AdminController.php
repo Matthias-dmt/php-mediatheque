@@ -44,6 +44,8 @@ class AdminController extends AbstractController
         $date = new \DateTime();
         $currentDate = $date->format('Y-m-d H:i:s');
         $oneMonthBefore = $date->sub($month);
+        var_dump($currentDate);
+        var_dump($oneMonthBefore);
 
         $members = $this->getDoctrine()->getRepository(Member::class)->listMemberRegisteredLastMonth($currentDate, $oneMonthBefore);
 
