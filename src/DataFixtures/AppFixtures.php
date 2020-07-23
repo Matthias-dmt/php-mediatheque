@@ -148,9 +148,10 @@ class AppFixtures extends Fixture
         // on créé 10 meet up
         for ($i = 0; $i < 10; $i++) {
             $meetUp = new MeetUp();
+            $meetUp->setTitle($faker->text($maxNbChars = 30));
             $meetUp->setEmployee($employeeRep->find($faker->numberBetween($min = 101, $max = 200)));
             $meetUp->setAuthor($authorRep->find($faker->numberBetween($min = 1, $max = 100)));
-            $meetUp->setDate($faker->dateTimeBetween($startDate = 'now', $endDate = '1 years', $timezone = null));
+            $meetUp->setDate($faker->dateTimeBetween($startDate = '-2years', $endDate = '6 months', $timezone = null));
             $manager->persist($meetUp);
         }
         $manager->flush();
