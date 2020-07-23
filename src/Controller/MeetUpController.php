@@ -10,12 +10,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 /**
  * @Route("/meetup")
  */
 class MeetUpController extends AbstractController
 {
+    private $participates;
+
+    private $manager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->manager = $entityManager;
+    }
     /**
      * @Route("/", name="meet_up_index", methods={"GET"})
      */
@@ -54,7 +64,26 @@ class MeetUpController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/upcoming", name="upcoming_meetUp", methods={"GET"})
+     */
+    public function showUpcomingEvent()
+    {
+        $meetUpRep = $this->manager->getRepository(MeetUp::class);
+        
+        $meetUps = $meetUpRep->upcomingEvent();
 
+        foreach($meetUps as $meetUp) 
+        {
+            var_dump($meetUp->getId());
+            
+        }
+
+        return $this->render('meet_up/upcomingEvent.html.twig', [
+            'meet_ups' => $meetUps,
+            
+        ]);
+    }
 
     /**
      * @Route("/{id}", name="meet_up_show", methods={"GET"})
@@ -99,5 +128,7 @@ class MeetUpController extends AbstractController
 
         return $this->redirectToRoute('meet_up_index');
     }
+
+    
 
 }

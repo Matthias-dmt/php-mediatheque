@@ -20,6 +20,27 @@ class MeetUpRepository extends ServiceEntityRepository
         parent::__construct($registry, MeetUp::class);
     }
 
+    
+
+    public function upcomingEvent()
+    {
+        $date = new \DateTime();
+        $currentDate = $date->format('Y-m-d H:i:s');
+
+        $test = $this->createQueryBuilder('m')
+            ->select('m')
+            // ->select('m.id, m.date, m.author, a.firstName, a.lastName')
+            ->innerJoin('m.author', 'a')
+            ->Where('m.date > :currentDate')
+            ->setParameter('currentDate', $currentDate)
+            ->getQuery();
+            var_dump($test->getDQL());
+            
+            return $test->getResult();
+            // ->getResult()
+        
+    }
+
     // /**
     //  * @return MeetUp[] Returns an array of MeetUp objects
     //  */
