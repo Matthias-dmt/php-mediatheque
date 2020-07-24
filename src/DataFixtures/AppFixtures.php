@@ -47,6 +47,8 @@ class AppFixtures extends Fixture
         $employeeRep = $this->manager->getRepository(Employee::class);
         $memberRep = $this->manager->getRepository(Member::class);
         
+        
+        // on donne le nombre de donnée pour chaque table
         $nbBook         = 120;
         $nbEbook        = 60;
         $nbCd           = 80;
@@ -64,7 +66,8 @@ class AppFixtures extends Fixture
         $nbDocuments = $nbBook + $nbEbook + $nbCd + $nbJournal + $nbDvd;
 
 
-        // on créé 100 book
+
+        // on créé des book
         for ($i = 0; $i < $nbBook; $i++) {
             $book = new Book();
             $book->setTitle($faker->name);
@@ -76,7 +79,7 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        // on créé 100 ebook
+        // on créé des ebook
         for ($i = 0; $i < $nbEbook; $i++) {
             $ebook = new EBook();
             $ebook->setTitle($faker->name);
@@ -88,7 +91,7 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        // on créé 100 cd
+        // on créé des cd
         for ($i = 0; $i < $nbCd; $i++) {
             $cd = new CD();
             $cd->setTitle($faker->name);
@@ -101,7 +104,7 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        // on créé 100 journal
+        // on créé des journal
         for ($i = 0; $i < $nbJournal; $i++) {
             $journal = new Journal();
             $journal->setTitle($faker->name);
@@ -114,7 +117,7 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        // on créé 100 DVD
+        // on créé des DVD
         for ($i = 0; $i < $nbDvd; $i++) {
             $dvd = new DVD();
             $dvd->setTitle($faker->name);
@@ -126,7 +129,15 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        // on créé 100 author
+
+        // on récupère le premier et dernier id des documents pour connaitre la valeur des clés étrangères
+        $firstDoc = ($docRep->findOneBy([]))->getId();
+        $lastDoc  = ($docRep->findOneBy([], ['id'   => 'desc']))->getId();
+
+
+
+
+        // on créé des author
         for ($i = 0; $i < $nbAuthor; $i++) {
             $author = new Author();
             $author->setFirstName($faker->firstName($gender = 'male' | 'female'));
@@ -135,7 +146,14 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        // on créé 100 member
+        // on récupère le premier et dernier id des autheurs pour connaitre la valeur des clés étrangères
+        $firstAuthor = ($authorRep->findOneBy([]))->getId();
+        $lastAuthor  = ($authorRep->findOneBy([], ['id'   => 'desc']))->getId();
+
+
+
+
+        // on créé des member
         for ($i = 0; $i < $nbMember; $i++) {
             $member = new Member();
             $member->setPseudo($faker->firstName($gender = 'male' | 'female') . $faker->lastName);
@@ -151,7 +169,13 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        // on créé 100 employee
+        // on récupère le premier et dernier id des membre pour connaitre la valeur des clés étrangères
+        $firstMember = ($memberRep->findOneBy([]))->getId();
+        $lastMember  = ($memberRep->findOneBy([], ['id'   => 'desc']))->getId();
+
+
+
+        // on créé des employee
         for ($i = 0; $i < $nbEmployee; $i++) {
             $employee = new Employee();
             $employee->setPseudo($faker->firstName($gender = 'male' | 'female') . $faker->lastName);
@@ -163,36 +187,56 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
+        // on récupère le premier et dernier id des employés pour connaitre la valeur des clés étrangères
+        $firstEmploy = ($employeeRep->findOneBy([]))->getId();
+        $lastEmploy  = ($employeeRep->findOneBy([], ['id' => 'desc']))->getId();
+
+        // on récupère le premier et dernier id des utilisateurs pour connaitre la valeur des clés étrangères
+        $firstUser = ($userRep->findOneBy([]))->getId();
+        $lastUser  = ($userRep->findOneBy([], ['id' => 'desc']))->getId();
 
 
-            $firstAuthorId = ($authorRep->findOneBy([], ['id' => 'desc']))->getId() - ($nbAuthor);
-            $firstEmployId = ($employeeRep->findOneBy([], ['id' => 'desc']))->getId() - ($nbEmployee);
-
-        // on créé 10 meet up
+            
+            $arrayTest = [];
+        // on créé des meet up
         for ($i = 0; $i < $nbMeetUp; $i++) {
             $meetUp = new MeetUp();
             $meetUp->setTitle($faker->text($maxNbChars = 30));
-            $meetUp->setEmployee($employeeRep->find($faker->numberBetween($min = $nbMember + 1, $max = $nbMember + $nbEmployee)));
-            $firstAuthorId++;
-            $meetUp->setAuthor($authorRep->find($firstAuthorId));
+            $meetUp->setEmployee($employeeRep->find($faker->numberBetween($min = $firstEmploy, $max = $lastEmploy)));
+
+            $j = false;
+            while($j == false){
+                $fakerAuthor = $faker->numberBetween($min = $firstAuthor, $max = $lastAuthor);
+                
+                if($authorRep->findBy(['id'=> $fakerAuthor]) && !in_array($fakerAuthor, $arrayTest)){
+                $arrayTest[] = $fakerAuthor;
+                $j = true;
+                }
+                // else var_dump($fakerAuthor);
+            }
+            $meetUp->setAuthor($authorRep->find($fakerAuthor));
             $meetUp->setDate($faker->dateTimeBetween($startDate = '- 2 years', $endDate = '6 month', $timezone = null));
             $manager->persist($meetUp);
         }
         $manager->flush();
 
-        // on créé 100 ressources
+        // on récupère le premier et dernier id des meetup pour connaitre la valeur des clés étrangères
+        $firstMeetUp = ($meetUpRep->findOneBy([]))->getId();
+        $lastMeetUp  = ($meetUpRep->findOneBy([], ['id'   => 'desc']))->getId();
+
+
+        // on créé des ressources
         for ($i = 0; $i < $nbRessources; $i++) {
             $ressources = new Ressources();
             $ressources->setUrl($faker->url);
             $ressources->setType($faker->randomElement($array = array('article', 'video', 'movie')));
-            $ressources->setDocument($docRep->find($faker->numberBetween($min = 1, $max = $nbDocuments)));
+            $ressources->setDocument($docRep->find($faker->numberBetween($min = $firstDoc, $max = $lastDoc)));
             $manager->persist($ressources);
         }
         $manager->flush();
 
 
-
-        // on créé 100 borrowing
+        // on créé des borrowing
         for ($i = 0; $i < $nbBorrowing; $i++) {
             $borrowing = new Borrowing();
             $startdateborrowing = $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = null);
@@ -201,27 +245,27 @@ class AppFixtures extends Fixture
             $borrowing->setStartDate($startdateborrowing);
             $borrowing->setExpectedReturnDate($dateOneMonth);
             $borrowing->setEffectiveReturnDate($faker->randomElement($array = array($faker->dateTimeBetween($startDate = $startdateborrowing, $endDate = '2 month', $timezone = null), NULL)));
-            $borrowing->setMember($memberRep->find($faker->numberBetween($min = 1, $max = $nbMember)));
-            $borrowing->setDocument($docRep->find($faker->numberBetween($min = 1, $max = $nbDocuments)));
+            $borrowing->setMember($memberRep->find($faker->numberBetween($min = $firstMember, $max = $lastMember)));
+            $borrowing->setDocument($docRep->find($faker->numberBetween($min = $firstDoc, $max = $lastDoc)));
             $manager->persist($borrowing);
         }
         $manager->flush();
 
-        // on créé 100 participates
+        // on créé des participates
         for ($i = 0; $i < $nbParticipates; $i++) {
             $participates = new Participates();
             $participates->setPlaces($faker->numberBetween($min = 20, $max = 200));
-            $participates->setMeetUp($meetUpRep->find($faker->numberBetween($min = 1, $max = 10)));
-            $participates->setUser($userRep->find($faker->numberBetween($min = 1, $max = $nbMember)));
+            $participates->setMeetUp($meetUpRep->find($faker->numberBetween($min = $firstMeetUp, $max = $lastMeetUp)));
+            $participates->setUser($userRep->find($faker->numberBetween($min = $firstUser, $max = $lastUser)));
             $manager->persist($participates);
         }
         $manager->flush();
 
-        // on créé 100 IsInvolvdIn
+        // on créé des IsInvolvdIn
         for ($i = 0; $i < $nbIsInvolvdIn; $i++) {
             $isInvolvedIn = new IsInvolvedIn();
 
-            $isInvolvedIn->setDocument($docRep->find($faker->numberBetween($min = 1, $max = $nbDocuments)));
+            $isInvolvedIn->setDocument($docRep->find($faker->numberBetween($min = $firstDoc, $max = $lastDoc)));
 
             switch (get_class($isInvolvedIn->getDocument())) {
                 case "App\Entity\DVD":
@@ -240,18 +284,18 @@ class AppFixtures extends Fixture
                     $isInvolvedIn->setRole($faker->randomElement($array = array('narrateur', 'auteur', 'illustrateur')));
                     break;
             }
-            $isInvolvedIn->setAuthor($authorRep->find($faker->numberBetween($min = 1, $max = $nbAuthor)));
+            $isInvolvedIn->setAuthor($authorRep->find($faker->numberBetween($min = $firstAuthor, $max = $lastAuthor)));
             $manager->persist($isInvolvedIn);
         }
         $manager->flush();
 
-        // on créé 100 maintenance
+        // on créé des maintenance
         for ($i = 0; $i < $nbMaintenance; $i++) {
             $maintenance = new Maintenance();
             $maintenance->setStatus($faker->randomElement($array = array('à changer', 'endommagé', 'correct', 'neuf')));
             $maintenance->setMaintenanceDate($faker->dateTimeBetween($startDate = '- 2 years', $endDate = 'now', $timezone = null));
-            $maintenance->setemployee($employeeRep->find($faker->numberBetween($min = $nbMember + 1, $max = $nbMember + $nbEmployee)));
-            $maintenance->setDocument($docRep->find($faker->numberBetween($min = 1, $max = $nbDocuments)));
+            $maintenance->setemployee($employeeRep->find($faker->numberBetween($min = $firstEmploy, $max = $lastEmploy)));
+            $maintenance->setDocument($docRep->find($faker->numberBetween($min = $firstDoc, $max = $lastDoc)));
             $manager->persist($maintenance);
         }
         $manager->flush();
