@@ -18,7 +18,6 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class MeetUpController extends AbstractController
 {
-    private $participates;
 
     private $manager;
 
@@ -72,7 +71,6 @@ class MeetUpController extends AbstractController
         $meetUpRep = $this->manager->getRepository(MeetUp::class);
         
         $meetUps = $meetUpRep->upcomingEvent();
-
 
         return $this->render('meet_up/upcomingEvent.html.twig', [
             'meet_ups' => $meetUps,

@@ -34,6 +34,7 @@ class MeetUpRepository extends ServiceEntityRepository
             ->Where('m.date > :currentDate')
             ->setParameter('currentDate', $currentDate)
             ->getQuery();   
+            
             return $test->getResult();
             // ->getResult()
         
