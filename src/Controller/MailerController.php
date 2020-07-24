@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Service\RelaunchService;
 use App\Entity\User;
 
+
 class MailerController extends AbstractController
 {
 
