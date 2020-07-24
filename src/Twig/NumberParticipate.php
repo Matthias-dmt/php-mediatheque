@@ -26,7 +26,6 @@ class NumberParticipate extends AbstractExtension
 
     public function numberParticipate($meetUpId)
     {
-        //var_dump($meetUpId);
 
         $participatesRep = $this->manager->getRepository(Participates::class);
 

@@ -73,12 +73,6 @@ class MeetUpController extends AbstractController
         
         $meetUps = $meetUpRep->upcomingEvent();
 
-        foreach($meetUps as $meetUp) 
-        {
-            var_dump($meetUp->getId());
-            
-        }
-
         return $this->render('meet_up/upcomingEvent.html.twig', [
             'meet_ups' => $meetUps,
             
