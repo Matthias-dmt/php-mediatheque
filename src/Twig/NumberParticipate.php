@@ -32,7 +32,9 @@ class NumberParticipate extends AbstractExtension
 
         $numberPlaces = $participatesRep->numberPlacesReserved($meetUpId);
         
-
-        return " nombre de participants inscrits : ".$numberPlaces[0]['totalPlaces'];
+        if (isset($numberPlaces[0])) {
+            return " nombre de participants inscrits : ".$numberPlaces[0]['totalPlaces'];    
+        }
+        return 0;
     }
 }
