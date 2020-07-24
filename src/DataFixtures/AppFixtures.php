@@ -210,7 +210,7 @@ class AppFixtures extends Fixture
         // on créé 100 participates
         for ($i = 0; $i < $nbParticipates; $i++) {
             $participates = new Participates();
-            $participates->setPlaces($faker->numberBetween($min = 20, $max = 200));
+            $participates->setPlaces($faker->numberBetween($min = 1, $max = 5));
             $participates->setMeetUp($meetUpRep->find($faker->numberBetween($min = 1, $max = 10)));
             $participates->setUser($userRep->find($faker->numberBetween($min = 1, $max = $nbMember)));
             $manager->persist($participates);

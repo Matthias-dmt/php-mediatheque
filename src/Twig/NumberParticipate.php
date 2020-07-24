@@ -26,13 +26,15 @@ class NumberParticipate extends AbstractExtension
 
     public function numberParticipate($meetUpId)
     {
-        //var_dump($meetUpId);
+        
 
         $participatesRep = $this->manager->getRepository(Participates::class);
 
         $numberPlaces = $participatesRep->numberPlacesReserved($meetUpId);
-        
 
+        var_dump($numberPlaces[0]['totalPlaces']);
+        exit;
+        
         return " nombre de participants inscrits : ".$numberPlaces[0]['totalPlaces'];
     }
 }
