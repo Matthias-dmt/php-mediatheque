@@ -17,7 +17,7 @@ class RelaunchService extends AbstractController
 
     public function relaunchSystem()
     {
-        $users = $this->getDoctrine()->getRepository(Borrowing::class)->membersNotDeliveredOnTime();
+        $users = $this->getDoctrine()->getRepository(Borrowing::class)->borrowedNotDelivered();
 
         foreach ($users as $user) {
             $email = (new \Swift_Message('Médiathèque : Email de relance'))

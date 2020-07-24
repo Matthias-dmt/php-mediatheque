@@ -1,0 +1,41 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block title %}Retards{% endblock %}
+
+{% block main %}
+
+<div class="container-fluid offset-1 col-10">
+    <h1 class="mb-3">Emprunts non rendu</h1>
+    <a class="btn btn-outline-secondary" href="{{ path('relaunch_email') }}">Envoyer des emails de relance</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Document</th>
+                <th>Date de retour initial</th>
+                <th>Nombre de jours de retard</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.title }}</td>
+                <td>{{ user.expectedReturnDate|date('d-m-Y') }}</td>
+                <td>{{ user.days }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

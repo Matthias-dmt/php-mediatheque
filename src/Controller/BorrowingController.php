@@ -32,6 +32,32 @@ class BorrowingController extends AbstractController
     }
 
     /**
+     * @Route("/retard", name="borrowing_retard", methods={"GET"})
+     */
+    public function borrowedNotDelivered()
+    {
+        $users = $this->getDoctrine()->getRepository(Borrowing::class)->borrowedNotDelivered();
+        $usersRetard = [];
+        // $relaunchService->relaunchSystem();
+
+        function NbJours($debut, $fin)
+        {
+            $diff = $debut->diff($fin)->format("%a");
+            return $diff;
+        }
+
+        foreach ($users as $user) {
+            $nbJours = NbJours($user['expectedReturnDate'], new \DateTime('now'));
+            $user["days"] = $nbJours;
+            $usersRetard[] = $user;
+        }
+
+        return $this->render('borrowing/borrowedNotDelivered.html.twig', [
+            'users' => $usersRetard,
+        ]);
+    }
+
+    /**
      * @Route("/new", name="borrowing_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
@@ -89,7 +115,7 @@ class BorrowingController extends AbstractController
      */
     public function delete(Request $request, Borrowing $borrowing): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$borrowing->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $borrowing->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($borrowing);
             $entityManager->flush();
