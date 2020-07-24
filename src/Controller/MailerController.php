@@ -4,9 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\RelaunchService;
-use App\Entity\User;
-
+use App\Services\RelaunchService;
+use App\Entity\Borrowing;
 
 class MailerController extends AbstractController
 {
@@ -14,13 +13,13 @@ class MailerController extends AbstractController
     /**
      * @Route("/relaunchEmail")
      */
-    public function sendRelaunchEmail(\Swift_Mailer $mailer, RelaunchService $relaunchService)
+    public function sendRelaunchEmail(RelaunchService $relaunchService)
     {
-        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
-        $relaunchService->relaunchSystem($mailer);
+        $users = $this->getDoctrine()->getRepository(Borrowing::class)->membersNotDeliveredOnTime();
+        $relaunchService->relaunchSystem();
 
         return $this->render('mailer/relaunch.html.twig', [
-            'user' => $user,
+            'user' => $users[1],
         ]);
     }
 }
