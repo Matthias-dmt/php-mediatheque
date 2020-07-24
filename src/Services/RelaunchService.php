@@ -1,27 +1,37 @@
 <?php
-namespace App\Service;
 
-use App\Entity\User;
+namespace App\Services;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Borrowing;
 
 class RelaunchService extends AbstractController
 {
 
-    public function relaunchSystem (\Swift_Mailer $mailer)
+    private $mailer;
+
+    public function __construct(\Swift_Mailer $mailer)
     {
-        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
+        $this->mailer = $mailer;
+    }
 
-        $email = (new \Swift_Message('Médiathèque : Email de relance'))
-        ->setFrom('lucas.riuk@gmail.com')
-        ->setTo($user->getEmail())
-        ->setBody(
-            $this->renderView(
-                'mailer/relaunch.html.twig',
-                ['user' => $user]
-            ),
-            'text/html'
-        );
+    public function relaunchSystem()
+    {
+        $users = $this->getDoctrine()->getRepository(Borrowing::class)->membersNotDeliveredOnTime();
 
-        $mailer->send($email);
+        foreach ($users as $user) {
+            $email = (new \Swift_Message('Médiathèque : Email de relance'))
+                ->setFrom('lucas.riuk@gmail.com')
+                ->setTo($user['email'])
+                ->setBody(
+                    $this->renderView(
+                        'mailer/relaunch.html.twig',
+                        ['user' => $user]
+                    ),
+                    'text/html'
+                );
+
+            $this->mailer->send($email);
+        }
     }
 }

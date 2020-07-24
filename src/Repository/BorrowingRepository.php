@@ -32,6 +32,21 @@ class BorrowingRepository extends ServiceEntityRepository
         ;
     }
 
+    public function membersNotDeliveredOnTime()
+    {
+        return $this->createQueryBuilder('b')
+            ->select('m.email, m.firstName, m.lastName, d.title')
+            ->innerJoin('b.member', 'm')
+            ->innerJoin('b.document', 'd')
+            ->where('b.effectiveReturnDate IS NULL')
+            ->andWhere('b.expectedReturnDate <= :now')
+            ->setParameter('now', new \DateTime('now'))
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Borrowing[] Returns an array of Borrowing objects
     //  */
