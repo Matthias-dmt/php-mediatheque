@@ -39,15 +39,8 @@ class BorrowingController extends AbstractController
         $borrowings = $this->getDoctrine()->getRepository(Borrowing::class)->borrowedNotDelivered();
         $borrowingsRetard = [];
 
-        function NbJours($debut, $fin)
-        {
-            $diff = $debut->diff($fin)->format("%a");
-            return $diff;
-        }
-
         foreach ($borrowings as $borrowing) {
-            $nbJours = NbJours($borrowing['expectedReturnDate'], new \DateTime('now'));
-            $borrowing["days"] = $nbJours;
+            $borrowing["days"] = $borrowing['expectedReturnDate']->diff(new \DateTime('now'))->format("%a");;
             $borrowingsRetard[] = $borrowing;
         }
 
