@@ -71,8 +71,6 @@ class BorrowingRepository extends ServiceEntityRepository
         ;
     }
 
-
-
     // /**
     //  * @return Borrowing[] Returns an array of Borrowing objects
     //  */
