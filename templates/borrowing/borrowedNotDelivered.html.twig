@@ -6,11 +6,15 @@
 
 <div class="container-fluid offset-1 col-10">
     <h1 class="mb-3">Emprunts non rendu</h1>
-    <a class="btn btn-outline-secondary" href="{{ path('relaunch_email') }}">Envoyer des emails de relance</a>
+    <a class="btn btn-outline-secondary mb-3" href="{{ path('relaunch_email') }}">Envoyer des mails de relance</a>
+    {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+    {% endfor %}
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Email</th>
                 <th>Prénom</th>
                 <th>Nom</th>
@@ -20,15 +24,14 @@
             </tr>
         </thead>
         <tbody>
-        {% for user in users %}
+        {% for borrowing in borrowings %}
             <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.title }}</td>
-                <td>{{ user.expectedReturnDate|date('d-m-Y') }}</td>
-                <td>{{ user.days }}</td>
+                <td>{{ borrowing.email }}</td>
+                <td>{{ borrowing.lastName }}</td>
+                <td>{{ borrowing.firstName }}</td>
+                <td>{{ borrowing.title }}</td>
+                <td>{{ borrowing.expectedReturnDate|date('d-m-Y') }}</td>
+                <td>{{ borrowing.days }}</td>
             </tr>
         {% else %}
             <tr>

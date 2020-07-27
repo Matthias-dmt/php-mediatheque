@@ -22,7 +22,7 @@ class MailerController extends AbstractController
     public function sendRelaunchEmail()
     {
         $this->relaunchService->relaunchSystem();
-
+        $this->addFlash('success', 'Mails envoyés !');
         return $this->redirectToRoute('borrowing_retard');
     }
 }

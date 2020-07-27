@@ -36,9 +36,8 @@ class BorrowingController extends AbstractController
      */
     public function borrowedNotDelivered()
     {
-        $users = $this->getDoctrine()->getRepository(Borrowing::class)->borrowedNotDelivered();
-        $usersRetard = [];
-        // $relaunchService->relaunchSystem();
+        $borrowings = $this->getDoctrine()->getRepository(Borrowing::class)->borrowedNotDelivered();
+        $borrowingsRetard = [];
 
         function NbJours($debut, $fin)
         {
@@ -46,14 +45,14 @@ class BorrowingController extends AbstractController
             return $diff;
         }
 
-        foreach ($users as $user) {
-            $nbJours = NbJours($user['expectedReturnDate'], new \DateTime('now'));
-            $user["days"] = $nbJours;
-            $usersRetard[] = $user;
+        foreach ($borrowings as $borrowing) {
+            $nbJours = NbJours($borrowing['expectedReturnDate'], new \DateTime('now'));
+            $borrowing["days"] = $nbJours;
+            $borrowingsRetard[] = $borrowing;
         }
 
         return $this->render('borrowing/borrowedNotDelivered.html.twig', [
-            'users' => $usersRetard,
+            'borrowings' => $borrowingsRetard,
         ]);
     }
 

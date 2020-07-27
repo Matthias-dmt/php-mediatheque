@@ -35,12 +35,13 @@ class BorrowingRepository extends ServiceEntityRepository
     public function borrowedNotDelivered()
     {
         return $this->createQueryBuilder('b')
-            ->select('m.id, m.email, m.firstName, m.lastName, d.title, b.expectedReturnDate')
+            ->select('m.email, m.firstName, m.lastName, d.title, b.expectedReturnDate')
             ->innerJoin('b.member', 'm')
             ->innerJoin('b.document', 'd')
             ->where('b.effectiveReturnDate IS NULL')
             ->andWhere('b.expectedReturnDate <= :now')
             ->setParameter('now', new \DateTime('now'))
+            ->setMaxResults(5)
             ->getQuery()
             ->getResult()
         ;
