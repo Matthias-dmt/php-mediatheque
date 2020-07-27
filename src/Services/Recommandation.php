@@ -33,13 +33,15 @@ class Recommandation extends AbstractController
 
             // pour chaque document récupéré j'enlève le document actuel + les documents qui ne sont pas de la même class
             // j'enlève également la colonne count() (en récupérant seulement la première clé) qui m'a servit à trier les données par importance
-            foreach ($documents as $document)
+            foreach ($documents as $document){
 
                 if ($document[0]->getDocument() !== $doc && is_a($document[0]->getDocument(), $entity)) {
 
                     // je créé mon tableau de retour, qui possèdera seulement les objets documents
                     $tabdoc[] = $document[0]->getDocument();
                 }
+                if(isset($tabdoc[4])){return $tabdoc;}
+            }
         }
 
 

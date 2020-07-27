@@ -66,7 +66,7 @@ class BorrowingRepository extends ServiceEntityRepository
         ->select('b, count(b.document) as d')
         ->groupBy('b.document')
         ->where('b.member ='.$member)
-        ->setMaxResults(5)
+        // ->setMaxResults(10)
         ->orderBy('d', 'desc')
         ->getQuery()
         ->getResult()
