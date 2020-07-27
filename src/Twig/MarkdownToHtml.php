@@ -4,18 +4,9 @@ namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use cebe\markdown\Markdown;
-
 
 class MarkdownToHtml extends AbstractExtension
 {
-
-    private $parser;
-
-    public function __construct(Markdown $parser)
-    {
-        $this->parser = $parser;
-    }
 
     public function getFilters()
     {

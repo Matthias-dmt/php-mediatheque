@@ -46,30 +46,6 @@ class BorrowingRepository extends ServiceEntityRepository
         ;
     }
 
-
-    public function membersForOneDoc($idDoc){
-
-        return $this->createQueryBuilder('b')
-        ->select('b')
-        ->where('b.document ='.$idDoc)
-        ->getQuery()
-        ->getResult()
-        ;
-    }
-
-    public function docsForOneMember($member){
-
-        return $this->createQueryBuilder('b')
-        ->select('b')
-        ->where('b.member ='.$member)
-        ->setMaxResults(5)
-        ->getQuery()
-        ->getResult()
-        ;
-    }
-
-
-
     // /**
     //  * @return Borrowing[] Returns an array of Borrowing objects
     //  */
