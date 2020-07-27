@@ -66,7 +66,9 @@
             {% endblock %}
             {% block main %}
             <div class="container-fluid offset-1 col-10">
-                <h1>Accueil</h1>
+                {#{ '## Accueil"'|htmlFormat|raw }#}
+                {{ '![Canada](canada.jpg)'|htmlFormat|raw }}
+
                 <div class="row">
                     {# <hx:include src="{{ path('admin_findMostAuthorsInCatalog') }}"></hx:include>
                     <hx:include src="{{ path('admin_listMemberRegLastMonth') }}"></hx:include>
@@ -92,6 +94,7 @@
                     
                 </div>
             </div>
+            {{ '[GitHub](http://github.com)'|htmlFormat|raw }}
             {% endblock %}
 
             {% endblock %}

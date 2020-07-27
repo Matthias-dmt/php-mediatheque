@@ -2,19 +2,19 @@
 
 namespace App\Twig;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
+use cebe\markdown\Markdown;
 
 
 class MarkdownToHtml extends AbstractExtension
 {
 
-    private $manager;
+    private $parser;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(Markdown $parser)
     {
-        $this->manager = $entityManager;
+        $this->parser = $parser;
     }
 
     public function getFilters()
@@ -24,10 +24,23 @@ class MarkdownToHtml extends AbstractExtension
         ];
     }
 
-    public function markdownToHtmlFormat()
+    public function markdownToHtmlFormat( $string ) : string
     {
-        
+        // $parsedString = $this->parser->parse($string);
+        // return $parsedString;
 
-        
+        if(preg_match('/^(#+)\s*(\w+)/', $string, $matches) == 1)
+        {
+            $level = substr_count($matches[1], '#', 0);
+            return "<h$level>$matches[2]</h$level>";
+        }
+        elseif(preg_match('/^\[([\w\s_]+)\]\((https?:\/\/[a-zA-Z\.0-9\/]+)\)/', $string, $matches))
+        {
+            return "<a target='_blank' href='$matches[2]'>$matches[1]</a>";
+        }
+        elseif(preg_match('/^!\[([\w\s_]+)\]\(([a-zA-Z\.0-9\/]+)\)/', $string, $matches))
+        {
+            return "<img src='../../public/img/$matches[2]' alt='$matches[1]'>";
+        }
     }
 }
