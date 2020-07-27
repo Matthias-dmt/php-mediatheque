@@ -31,3 +31,12 @@ div.pagination span.current{
     background-color: #4CAF50;
     color: white;
   }
+
+  div.recommandation{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+  }
+  div.recommandation h5{
+    font-size: 80%;
+}  

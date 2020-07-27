@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Form\BookType;
+use App\Services\Recommandation;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,10 +61,11 @@ class BookController extends AbstractController
     /**
      * @Route("/{id}", name="book_show", methods={"GET"})
      */
-    public function show(Book $book): Response
+    public function show(Book $book, Recommandation $reco): Response
     {
         return $this->render('book/show.html.twig', [
             'book' => $book,
+            'recommandation' => $reco->recommandation($book),
         ]);
     }
 
