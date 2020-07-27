@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Borrowing;
 
 class RelaunchService extends AbstractController
 {
@@ -15,23 +14,36 @@ class RelaunchService extends AbstractController
         $this->mailer = $mailer;
     }
 
-    public function relaunchSystem()
+    public function relaunchSystem($borrowings)
     {
-        $users = $this->getDoctrine()->getRepository(Borrowing::class)->borrowedNotDelivered();
+        foreach ($borrowings as $borrowing) {
+            if ($borrowing['days'] < 182) { // 6 mois
+                $email = (new \Swift_Message('Médiathèque : Email de relance'))
+                    ->setFrom('lucas.riuk@gmail.com')
+                    ->setTo($borrowing['email'])
+                    ->setBody(
+                        $this->renderView(
+                            'mailer/relaunch.html.twig',
+                            ['borrowing' => $borrowing]
+                        ),
+                        'text/html'
+                    );
 
-        foreach ($users as $user) {
-            $email = (new \Swift_Message('Médiathèque : Email de relance'))
-                ->setFrom('lucas.riuk@gmail.com')
-                ->setTo($user['email'])
-                ->setBody(
-                    $this->renderView(
-                        'mailer/relaunch.html.twig',
-                        ['user' => $user]
-                    ),
-                    'text/html'
-                );
+                $this->mailer->send($email);
+            } else {
+                $email = (new \Swift_Message('Médiathèque : Email de pénalité'))
+                    ->setFrom('lucas.riuk@gmail.com')
+                    ->setTo($borrowing['email'])
+                    ->setBody(
+                        $this->renderView(
+                            'mailer/penalty.html.twig',
+                            ['borrowing' => $borrowing]
+                        ),
+                        'text/html'
+                    );
 
-            $this->mailer->send($email);
+                $this->mailer->send($email);
+            }
         }
     }
 }

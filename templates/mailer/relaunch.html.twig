@@ -1,12 +1,12 @@
- <h1>Bonjour {{ user.firstName }} {{ user.lastName }} !</h1>
+ <h1>Bonjour {{ borrowing.firstName }} {{ borrowing.lastName }} !</h1>
 
 <p>
     Vous avez emprunté à la médiathèque le(s) document(s) suivant(s) :
-    {{ user.title }}
+    {{ borrowing.title }}
 </p>
 
 <p>
-    Nous vous rappelons que la durée du prêt est dépassé.<br>
+    Nous vous rappelons que la durée du prêt est dépassé de {{ borrowing.days }} jours<br>
     Nous vous remercions de bien vouloir rapporter cet (ces) document(s) le plus<br>
     rapidement possible, afin que d’autres personnes puissent en profiter. 
 </p>

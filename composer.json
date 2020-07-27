@@ -5,6 +5,7 @@
         "php": "^7.4.7",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "cebe/markdown": "^1.2",
         "doctrine/annotations": "^1.10",
         "fzaninotto/faker": "^1.9",
         "knplabs/knp-paginator-bundle": "^5.3",
