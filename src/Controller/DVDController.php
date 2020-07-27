@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\DVD;
 use App\Form\DVDType;
+use App\Services\Recommandation;
 use App\Repository\DVDRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,10 +62,12 @@ class DVDController extends AbstractController
     /**
      * @Route("/{id}", name="dvd_show", methods={"GET"})
      */
-    public function show(DVD $dVD): Response
+    public function show(DVD $dVD, Recommandation $reco): Response
     {
         return $this->render('dvd/show.html.twig', [
             'dvd' => $dVD,
+            'recommandation' => $reco->recommandation($dVD),
+
         ]);
     }
 

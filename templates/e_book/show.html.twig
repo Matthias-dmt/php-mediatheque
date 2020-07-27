@@ -42,4 +42,18 @@
 
     {{ include('e_book/_delete_form.html.twig') }}
 </div>
+
+<h4>EBook recommandé</h4>
+
+<div class = "recommandation">
+
+
+        {% for ebook in recommandation %}
+
+<a href="{{ path('e_book_show', {'id': ebook.id}) }}">{{ ebook.title }}</a>
+
+
+    {% endfor %}
+</div>
+
 {% endblock %}

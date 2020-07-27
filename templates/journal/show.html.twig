@@ -47,4 +47,18 @@
     {{ include('journal/_delete_form.html.twig') }}
 </div>
 
+<h4>Journaux recommandé</h4>
+
+<div class = "recommandation">
+
+
+        {% for journal in recommandation %}
+
+<a href="{{ path('journal_show', {'id': journal.id}) }}">{{ journal.title }}</a>
+
+
+    {% endfor %}
+</div>
+
+
 {% endblock %}

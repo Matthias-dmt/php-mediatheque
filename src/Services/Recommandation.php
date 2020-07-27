@@ -17,6 +17,7 @@ class Recommandation extends AbstractController
 
         //liste des membres qui ont emprunté le document $doc
         $members = $this->getDoctrine()->getRepository(Borrowing::class)->membersForOneDoc($doc->getId());
+        $entity = get_class($doc);
 
         $tabdoc = [];
 
@@ -26,15 +27,16 @@ class Recommandation extends AbstractController
         
         foreach($documents as $document)
 
-        if($document->getDocument() !== $doc)
-
-        $tabdoc[] = $document->getDocument();
+        if($document[0]->getDocument() !== $doc && is_a($document[0]->getDocument(), $entity)){
 
 
+        
+        $tabdoc[] = $document[0]->getDocument();
             // $documents = $this->getDoctrine()->getRepository(Borrowing::class)->memberForOneDoc($document->getId());
             // $tabdoc[] = $document;
         }
 
+    }
 
 
         return $tabdoc;

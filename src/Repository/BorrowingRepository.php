@@ -46,6 +46,7 @@ class BorrowingRepository extends ServiceEntityRepository
         ;
     }
 
+    
 
     public function membersForOneDoc($idDoc){
 
@@ -60,9 +61,11 @@ class BorrowingRepository extends ServiceEntityRepository
     public function docsForOneMember($member){
 
         return $this->createQueryBuilder('b')
-        ->select('b')
+        ->select('b, count(b.document) as d')
+        ->groupBy('b.document')
         ->where('b.member ='.$member)
         ->setMaxResults(5)
+        ->orderBy('d', 'desc')
         ->getQuery()
         ->getResult()
         ;

@@ -43,4 +43,18 @@
     {{ include('dvd/_delete_form.html.twig') }}
 </div>
 
+<h4>DVD recommandé</h4>
+
+<div class = "recommandation">
+
+
+        {% for dvd in recommandation %}
+
+<a href="{{ path('dvd_show', {'id': dvd.id}) }}">{{ dvd.title }}</a>
+
+
+    {% endfor %}
+</div>
+
+
 {% endblock %}

@@ -46,7 +46,8 @@
 <h4>Livres recommandé</h4>
 
 <div class = "recommandation">
-    
+
+
         {% for book in recommandation %}
 
 <a href="{{ path('book_show', {'id': book.id}) }}">{{ book.title }}</a>
