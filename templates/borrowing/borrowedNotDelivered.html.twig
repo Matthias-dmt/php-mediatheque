@@ -15,9 +15,9 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Email</th>
                 <th>Prénom</th>
                 <th>Nom</th>
+                <th>Email</th>
                 <th>Document</th>
                 <th>Date de retour initial</th>
                 <th>Nombre de jours de retard</th>
@@ -26,12 +26,12 @@
         <tbody>
         {% for borrowing in borrowings %}
             <tr>
-                <td>{{ borrowing.email }}</td>
                 <td>{{ borrowing.lastName }}</td>
                 <td>{{ borrowing.firstName }}</td>
+                <td>{{ borrowing.email }}</td>
                 <td>{{ borrowing.title }}</td>
                 <td>{{ borrowing.expectedReturnDate|date('d-m-Y') }}</td>
-                <td>{{ borrowing.days }}</td>
+                <td {% if borrowing.days > 182 %} class="text-danger" {% endif %}>{{ borrowing.days }} {% if borrowing.days > 182 %} / Amende{% endif %}</td>
             </tr>
         {% else %}
             <tr>

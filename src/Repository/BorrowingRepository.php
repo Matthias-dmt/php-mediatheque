@@ -41,7 +41,6 @@ class BorrowingRepository extends ServiceEntityRepository
             ->where('b.effectiveReturnDate IS NULL')
             ->andWhere('b.expectedReturnDate <= :now')
             ->setParameter('now', new \DateTime('now'))
-            ->setMaxResults(5)
             ->getQuery()
             ->getResult()
         ;
