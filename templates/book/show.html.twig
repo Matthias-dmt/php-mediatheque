@@ -52,6 +52,7 @@
 
 <a href="{{ path('book_show', {'id': book.id}) }}">{{ book.title }}</a>
 
+{% else %}<p>Aucune recommandation disponible pour le moment</p>
 
     {% endfor %}
 </div>

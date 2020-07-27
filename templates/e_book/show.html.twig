@@ -48,11 +48,12 @@
 <div class = "recommandation">
 
 
-        {% for ebook in recommandation %}
+    {% for ebook in recommandation %}
 
-<a href="{{ path('e_book_show', {'id': ebook.id}) }}">{{ ebook.title }}</a>
+    <a href="{{ path('e_book_show', {'id': ebook.id}) }}">{{ ebook.title }}</a>
 
 
+    {% else %}<p>Aucune recommandation disponible pour le moment</p>
     {% endfor %}
 </div>
 

@@ -56,7 +56,7 @@
 
 <a href="{{ path('cd_show', {'id': cd.id}) }}">{{ cd.title }}</a>
 
-
+    {% else %}<p>Aucune recommandation disponible pour le moment</p>
     {% endfor %}
 </div>
 

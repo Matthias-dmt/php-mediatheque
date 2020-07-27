@@ -52,7 +52,7 @@
 
 <a href="{{ path('dvd_show', {'id': dvd.id}) }}">{{ dvd.title }}</a>
 
-
+    {% else %}<p>Aucune recommandation disponible pour le moment</p>
     {% endfor %}
 </div>
 
