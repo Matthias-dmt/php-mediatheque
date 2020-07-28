@@ -82,7 +82,7 @@ class AppFixtures extends Fixture
         // on créé des ebook
         for ($i = 0; $i < $nbEbook; $i++) {
             $ebook = new EBook();
-            $ebook->setTitle($faker->name);
+            $ebook->setTitle(rtrim($faker->text($maxNbChars = 20), '.'));
             $ebook->setCote($faker->text($maxNbChars = 5));
             $ebook->setFormat($faker->randomElement($array = array('de poche', 'grand', 'moyen')));
             $ebook->setCodeOeuvre($faker->randomNumber($nbDigits = NULL, $strict = false));
@@ -94,7 +94,7 @@ class AppFixtures extends Fixture
         // on créé des cd
         for ($i = 0; $i < $nbCd; $i++) {
             $cd = new CD();
-            $cd->setTitle($faker->name);
+            $cd->setTitle(rtrim($faker->text($maxNbChars = 10), '.'));
             $cd->setCote($faker->text($maxNbChars = 5));
             $cd->setFormat($faker->randomElement($array = array('audio', 'video', 'blueray')));
             $cd->setCodeOeuvre($faker->randomNumber($nbDigits = NULL, $strict = false));
@@ -107,7 +107,7 @@ class AppFixtures extends Fixture
         // on créé des journal
         for ($i = 0; $i < $nbJournal; $i++) {
             $journal = new Journal();
-            $journal->setTitle($faker->name);
+            $journal->setTitle(rtrim($faker->text($maxNbChars = 10), '.'));
             $journal->setCote($faker->text($maxNbChars = 5));
             $journal->setFormat($faker->randomElement($array = array('de poche', 'grand', 'moyen')));
             $journal->setCodeOeuvre($faker->randomNumber($nbDigits = NULL, $strict = false));
@@ -120,7 +120,7 @@ class AppFixtures extends Fixture
         // on créé des DVD
         for ($i = 0; $i < $nbDvd; $i++) {
             $dvd = new DVD();
-            $dvd->setTitle($faker->name);
+            $dvd->setTitle(rtrim($faker->text($maxNbChars = 20), '.'));
             $dvd->setCote($faker->text($maxNbChars = 5));
             $dvd->setFormat($faker->randomElement($array = array('audio', 'video', 'blueray')));
             $dvd->setCodeOeuvre($faker->randomNumber($nbDigits = NULL, $strict = false));
