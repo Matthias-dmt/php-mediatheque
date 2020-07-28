@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\CD;
 use App\Services\Recommandation;
+use App\Entity\IsInvolvedIn;
 use App\Form\CDType;
 use App\Repository\CDRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -64,9 +65,12 @@ class CDController extends AbstractController
      */
     public function show(CD $cD, Recommandation $reco): Response
     {
+        $sameAuthor = $this->getDoctrine()->getRepository(IsInvolvedIn::class)->authorsForOneDoc($cD);
+
         return $this->render('cd/show.html.twig', [
             'cd' => $cD,
             'recommandation' => $reco->recommandation($cD),
+            'author'     => $sameAuthor,
 
         ]);
     }

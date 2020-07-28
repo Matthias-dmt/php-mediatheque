@@ -37,6 +37,13 @@
                     <th>SubscriptionDate</th>
                     <td>{{ journal.subscriptionDate ? journal.subscriptionDate|date('Y-m-d H:i:s') : '' }}</td>
                 </tr>
+                {% for involved in author %}
+                <tr>
+                    <th>{{ involved.role }}</th>
+                    <td> {{ involved.author }}</td>
+                    
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
 

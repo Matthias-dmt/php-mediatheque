@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\EBook;
+use App\Entity\IsInvolvedIn;
 use App\Form\EBookType;
 use App\Services\Recommandation;
 use App\Repository\EBookRepository;
@@ -64,9 +65,13 @@ class EBookController extends AbstractController
      */
     public function show(EBook $eBook, Recommandation $reco): Response
     {
+        $sameAuthor = $this->getDoctrine()->getRepository(IsInvolvedIn::class)->authorsForOneDoc($eBook);
+
+
         return $this->render('e_book/show.html.twig', [
             'e_book' => $eBook,
             'recommandation' => $reco->recommandation($eBook),
+            'author'     => $sameAuthor,
 
         ]);
     }

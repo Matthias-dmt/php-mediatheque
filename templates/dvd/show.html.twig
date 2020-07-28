@@ -33,6 +33,13 @@
                     <th>Duration</th>
                     <td>{{ dvd.duration ? dvd.duration|date('H:i:s') : '' }}</td>
                 </tr>
+                {% for involved in author %}
+                <tr>
+                    <th>{{ involved.role }}</th>
+                    <td> {{ involved.author }}</td>
+                    
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
 

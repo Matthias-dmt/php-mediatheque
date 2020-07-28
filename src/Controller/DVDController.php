@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\DVD;
 use App\Form\DVDType;
 use App\Services\Recommandation;
+use App\Entity\IsInvolvedIn;
 use App\Repository\DVDRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,9 +65,13 @@ class DVDController extends AbstractController
      */
     public function show(DVD $dVD, Recommandation $reco): Response
     {
+        $sameAuthor = $this->getDoctrine()->getRepository(IsInvolvedIn::class)->authorsForOneDoc($dVD);
+
+
         return $this->render('dvd/show.html.twig', [
             'dvd' => $dVD,
             'recommandation' => $reco->recommandation($dVD),
+            'author'     => $sameAuthor,
 
         ]);
     }

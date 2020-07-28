@@ -37,6 +37,13 @@
                     <th>Duration</th>
                     <td>{{ cd.duration ? cd.duration|date('H:i:s') : '' }}</td>
                 </tr>
+                {% for involved in author %}
+                <tr>
+                    <th>{{ involved.role }}</th>
+                    <td> {{ involved.author }}</td>
+                    
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
 
