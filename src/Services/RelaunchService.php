@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Borrowing;
 
 class RelaunchService extends AbstractController
 {
@@ -16,17 +17,25 @@ class RelaunchService extends AbstractController
         $this->delay = $delay;
     }
 
-    public function relaunchSystem($borrowings)
+    public function relaunchSystem()
     {
+        $borrowings = $this->getDoctrine()->getRepository(Borrowing::class)->borrowedNotDelivered();
+        $borrowingsRetard = [];
+
         foreach ($borrowings as $borrowing) {
-            if ($borrowing['days'] < 182) { // 6 mois
+            $borrowing["days"] = $borrowing['expectedReturnDate']->diff(new \DateTime('now'))->format("%a");;;
+            $borrowingsRetard[] = $borrowing;
+        }
+
+        foreach ($borrowingsRetard as $borrowingRetard) {
+            if ($borrowingRetard['days'] < 182) { //6 mois
                 $email = (new \Swift_Message('Médiathèque : Email de relance'))
                     ->setFrom('lucas.riuk@gmail.com')
-                    ->setTo($borrowing['email'])
+                    ->setTo($borrowingRetard['email'])
                     ->setBody(
                         $this->renderView(
                             'mailer/relaunch.html.twig',
-                            ['borrowing' => $borrowing]
+                            ['borrowing' => $borrowingRetard]
                         ),
                         'text/html'
                     );
@@ -34,17 +43,17 @@ class RelaunchService extends AbstractController
                 $this->mailer->send($email);
             } else {
                 $email = (new \Swift_Message('Médiathèque : Email de pénalité'))
-                    ->setFrom('lucas.riuk@gmail.com')
-                    ->setTo($borrowing['email'])
-                    ->setBody(
-                        $this->renderView(
-                            'mailer/penalty.html.twig',
-                            ['borrowing' => $borrowing]
-                        ),
-                        'text/html'
-                    );
+                ->setFrom('lucas.riuk@gmail.com')
+                ->setTo($borrowingRetard['email'])
+                ->setBody(
+                    $this->renderView(
+                        'mailer/penalty.html.twig',
+                        ['borrowing' => $borrowingRetard]
+                    ),
+                    'text/html'
+                );
 
-                $this->mailer->send($email);
+            $this->mailer->send($email);
             }
         }
     }

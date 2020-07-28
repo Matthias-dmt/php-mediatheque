@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Journal;
-use App\Entity\Ressources;
+use App\Entity\IsInvolvedIn;
+use App\Services\Recommandation;
 use App\Form\JournalType;
 use App\Repository\JournalRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -62,10 +63,16 @@ class JournalController extends AbstractController
     /**
      * @Route("/{id}", name="journal_show", methods={"GET"})
      */
-    public function show(Journal $journal): Response
+    public function show(Journal $journal, Recommandation $reco): Response
     {
+        $sameAuthor = $this->getDoctrine()->getRepository(IsInvolvedIn::class)->authorsForOneDoc($journal);
+
+
         return $this->render('journal/show.html.twig', [
             'journal' => $journal,
+            'recommandation' => $reco->recommandation($journal),
+            'author'     => $sameAuthor,
+
         ]);
     }
 

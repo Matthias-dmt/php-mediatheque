@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\EBook;
+use App\Entity\IsInvolvedIn;
 use App\Form\EBookType;
+use App\Services\Recommandation;
 use App\Repository\EBookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,10 +63,16 @@ class EBookController extends AbstractController
     /**
      * @Route("/{id}", name="e_book_show", methods={"GET"})
      */
-    public function show(EBook $eBook): Response
+    public function show(EBook $eBook, Recommandation $reco): Response
     {
+        $sameAuthor = $this->getDoctrine()->getRepository(IsInvolvedIn::class)->authorsForOneDoc($eBook);
+
+
         return $this->render('e_book/show.html.twig', [
             'e_book' => $eBook,
+            'recommandation' => $reco->recommandation($eBook),
+            'author'     => $sameAuthor,
+
         ]);
     }
 

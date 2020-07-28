@@ -47,4 +47,21 @@ class IsInvolvedInRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function authorsForOneDoc($doc){
+
+        return $this->createQueryBuilder('i')
+                    ->select('i, a')
+                    ->andWhere('i.document ='.$doc->getId())
+                    ->innerJoin('i.author', 'a')
+                    ->groupBy('a.id')
+                    ->getQuery()
+                    ->getResult()
+                    ;
+    }
+
+
+    public function docsBySameAuthor(){}
+
+
 }
