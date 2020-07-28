@@ -16,3 +16,8 @@ framework:
     #fragments: true
     php_errors:
         log: true
+    
+    # Default option for hhtp_client framework
+    http_client:
+        default_options:
+            max_redirects: 7

@@ -20,7 +20,7 @@
         {% for author in authors %}
             <tr>
                 <td>{{ author.id }}</td>
-                <td>{{ author.firstName }}</td>
+                <td>{{ biographie(author.firstName, author.lastName)|raw }}</td>
                 <td>{{ author.lastName }}</td>
                 <td>
                     <a href="{{ path('author_show', {'id': author.id}) }}">show</a>

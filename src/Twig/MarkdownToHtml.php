@@ -40,7 +40,8 @@ class MarkdownToHtml extends AbstractExtension
         }
         elseif(preg_match('/^!\[([\w\s_]+)\]\(([a-zA-Z\.0-9\/]+)\)/', $string, $matches))
         {
+
             return "<img src='../../public/img/$matches[2]' alt='$matches[1]'>";
-        }
+        } 
     }
 }

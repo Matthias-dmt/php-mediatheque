@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Author;
 use App\Entity\Member;

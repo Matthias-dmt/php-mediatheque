@@ -8,10 +8,12 @@ class RelaunchService extends AbstractController
 {
 
     private $mailer;
+    private $delay = null;
 
-    public function __construct(\Swift_Mailer $mailer)
+    public function __construct(\Swift_Mailer $mailer, ?int $delay = null)
     {
         $this->mailer = $mailer;
+        $this->delay = $delay;
     }
 
     public function relaunchSystem($borrowings)
