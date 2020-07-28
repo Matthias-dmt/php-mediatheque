@@ -49,17 +49,17 @@ class AppFixtures extends Fixture
         
         
         // on donne le nombre de donnée pour chaque table
-        $nbBook         = 120;
-        $nbEbook        = 60;
-        $nbCd           = 80;
-        $nbJournal      = 20;
+        $nbBook         = 50;
+        $nbEbook        = 50;
+        $nbCd           = 50;
+        $nbJournal      = 50;
         $nbDvd          = 50;
-        $nbAuthor       = 60;
-        $nbMember       = 100;
+        $nbAuthor       = 150;
+        $nbMember       = 50;
         $nbEmployee     = 10;
         $nbMeetUp       = 20;   //doit etre inferieure à Author
         $nbRessources   = 120;
-        $nbBorrowing    = 280;
+        $nbBorrowing    = 700;
         $nbParticipates = 120;
         $nbIsInvolvdIn  = 140;
         $nbMaintenance  = 40;
@@ -70,7 +70,7 @@ class AppFixtures extends Fixture
         // on créé des book
         for ($i = 0; $i < $nbBook; $i++) {
             $book = new Book();
-            $book->setTitle($faker->name);
+            $book->setTitle(rtrim($faker->text($maxNbChars = 20), '.'));
             $book->setCote($faker->text($maxNbChars = 5));
             $book->setFormat($faker->randomElement($array = array('de poche', 'grand', 'moyen')));
             $book->setCodeOeuvre($faker->randomNumber($nbDigits = NULL, $strict = false));
