@@ -28,7 +28,7 @@ class RelaunchService extends AbstractController
         }
 
         foreach ($borrowingsRetard as $borrowingRetard) {
-            if ($borrowingRetard['days'] < 182) { //6 mois
+            if ($borrowingRetard['days'] < $this->delay) {
                 $email = (new \Swift_Message('Médiathèque : Email de relance'))
                     ->setFrom('lucas.riuk@gmail.com')
                     ->setTo($borrowingRetard['email'])

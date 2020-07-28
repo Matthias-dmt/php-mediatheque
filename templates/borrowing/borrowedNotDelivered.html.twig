@@ -31,7 +31,7 @@
                 <td>{{ borrowing.email }}</td>
                 <td>{{ borrowing.title }}</td>
                 <td>{{ borrowing.expectedReturnDate|date('d-m-Y') }}</td>
-                <td {% if borrowing.days > 182 %} class="text-danger" {% endif %}>{{ borrowing.days }} {% if borrowing.days > 182 %} / Amende{% endif %}</td>
+                <td {% if borrowing.days > 90 %} class="text-danger" {% endif %}>{{ borrowing.days }} {% if borrowing.days > 90 %} / Amende{% endif %}</td>
             </tr>
         {% else %}
             <tr>
