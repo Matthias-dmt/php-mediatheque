@@ -6,6 +6,7 @@ use App\Repository\EmployeeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @ORM\Entity(repositoryClass=EmployeeRepository::class)
@@ -30,10 +31,12 @@ class Employee extends User
      */
     private $organizes;
 
-    public function __construct()
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->organizes = new ArrayCollection();
         $this->maintenances = new ArrayCollection();
+        $this->passwordEncoder = $passwordEncoder;
+
     }
 
     public function getId(): ?int

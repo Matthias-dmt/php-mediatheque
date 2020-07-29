@@ -19,14 +19,63 @@ class Role
      */
     private $id;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="roles")
+     */
+    private $label;
+
     public function __construct()
     {
         $this->participates = new ArrayCollection();
+        $this->label = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getLabel(): Collection
+    {
+        return $this->label;
+    }
+
+    public function addLabel(User $label): self
+    {
+        if (!$this->label->contains($label)) {
+            $this->label[] = $label;
+        }
+
+        return $this;
+    }
+
+    public function removeLabel(User $label): self
+    {
+        if ($this->label->contains($label)) {
+            $this->label->removeElement($label);
+        }
+
+        return $this;
     }
 
 }

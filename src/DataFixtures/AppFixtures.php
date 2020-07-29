@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -21,16 +22,19 @@ use App\Entity\Maintenance;
 use App\Entity\Participates;
 use App\Entity\IsInvolvedIn;
 use App\Entity\MeetUp;
+use App\Entity\Role;
 use DateTime;
 use Faker;
 
 class AppFixtures extends Fixture
 {
     private $manager;
+    private $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->manager = $entityManager;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function load(ObjectManager $manager)
@@ -46,6 +50,20 @@ class AppFixtures extends Fixture
         $authorRep = $this->manager->getRepository(Author::class);
         $employeeRep = $this->manager->getRepository(Employee::class);
         $memberRep = $this->manager->getRepository(Member::class);
+        $roleRep = $this->manager->getRepository(Role::class);
+
+        // Creation des roles
+        $role = new Role();
+        $role->setName('ROLE_ADMIN');
+        $manager->persist($role);
+
+        $role = new Role();
+        $role->setName('ROLE_USER');
+        $manager->persist($role);
+
+        $manager->flush();
+
+
         
         
         // on donne le nombre de donnée pour chaque table
@@ -79,6 +97,9 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
+
+
+
         // on créé des ebook
         for ($i = 0; $i < $nbEbook; $i++) {
             $ebook = new EBook();
@@ -90,6 +111,9 @@ class AppFixtures extends Fixture
             $manager->persist($ebook);
         }
         $manager->flush();
+
+
+
 
         // on créé des cd
         for ($i = 0; $i < $nbCd; $i++) {
@@ -104,6 +128,9 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
+
+
+
         // on créé des journal
         for ($i = 0; $i < $nbJournal; $i++) {
             $journal = new Journal();
@@ -117,6 +144,8 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
+
+
         // on créé des DVD
         for ($i = 0; $i < $nbDvd; $i++) {
             $dvd = new DVD();
@@ -128,6 +157,7 @@ class AppFixtures extends Fixture
             $manager->persist($dvd);
         }
         $manager->flush();
+
 
 
         // on récupère le premier et dernier id des documents pour connaitre la valeur des clés étrangères
@@ -152,10 +182,9 @@ class AppFixtures extends Fixture
 
 
 
-
         // on créé des member
         for ($i = 0; $i < $nbMember; $i++) {
-            $member = new Member();
+            $member = new Member($this->passwordEncoder);
             $member->setPseudo($faker->firstName($gender = 'male' | 'female') . $faker->lastName);
             $member->setPassword($faker->password);
             $member->setFirstName($faker->firstName($gender = 'male' | 'female'));
@@ -166,7 +195,14 @@ class AppFixtures extends Fixture
             $member->setMembershipDate($faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = null));
             $member->setEmail($faker->freeEmail);
             $manager->persist($member);
+
+
         }
+
+
+
+
+
         $manager->flush();
 
         // on récupère le premier et dernier id des membre pour connaitre la valeur des clés étrangères
@@ -177,15 +213,19 @@ class AppFixtures extends Fixture
 
         // on créé des employee
         for ($i = 0; $i < $nbEmployee; $i++) {
-            $employee = new Employee();
+            $employee = new Employee($this->passwordEncoder);
             $employee->setPseudo($faker->firstName($gender = 'male' | 'female') . $faker->lastName);
             $employee->setFirstName($faker->firstName($gender = 'male' | 'female'));
             $employee->setLastName($faker->lastName);
-            $employee->setPassword($faker->password);
+            $pass = $faker->password;
+            $employee->setPassword($pass);
             $employee->setEmail($faker->freeEmail);
             $manager->persist($employee);
+
         }
         $manager->flush();
+
+
 
         // on récupère le premier et dernier id des employés pour connaitre la valeur des clés étrangères
         $firstEmploy = ($employeeRep->findOneBy([]))->getId();
@@ -212,7 +252,6 @@ class AppFixtures extends Fixture
                 $arrayTest[] = $fakerAuthor;
                 $j = true;
                 }
-                // else var_dump($fakerAuthor);
             }
             $meetUp->setAuthor($authorRep->find($fakerAuthor));
             $meetUp->setDate($faker->dateTimeBetween($startDate = '- 2 years', $endDate = '6 month', $timezone = null));

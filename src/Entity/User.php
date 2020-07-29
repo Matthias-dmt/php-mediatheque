@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\InheritanceType("SINGLE_TABLE")
@@ -54,12 +55,21 @@ class User implements UserInterface
      */
     private $participates;
 
-    private $passwordEncoder;
+    public $passwordEncoder;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Role::class, mappedBy="label")
+     */
+    private $roles;
+
+ 
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->participates = new ArrayCollection();
         $this->passwordEncoder = $passwordEncoder;
+        $this->roles = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -72,6 +82,11 @@ class User implements UserInterface
         return $this->pseudo;
     }
 
+    public function getUsername(): ?string
+    {
+        return $this->pseudo;
+    }
+
     public function setPseudo(string $pseudo): self
     {
         $this->pseudo = $pseudo;
@@ -79,9 +94,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
     {
-        return $this->password;
+        return (string) $this->password;
     }
 
     public function setPassword(string $password): self
@@ -90,6 +108,49 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles()
+    {
+        $roles = $this->roles;
+
+        
+        
+        $roleName = [];
+        foreach($roles as $role){
+            $roleName[] = $role->getName();
+        }
+
+        // $roleName = array_map(function($item){return var_dump($item->name);},$roles);
+        
+
+        // guarantee every user at least has ROLE_USER
+        $roleName[] = 'ROLE_USER';
+
+        return $roleName;
+    }
+
+     
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
 
     public function getFirstName(): ?string
     {
@@ -160,5 +221,25 @@ class User implements UserInterface
 
     public function __toString() {
         return $this->firstName . ' ' . $this->lastName;
+    }
+
+    public function addRole(Role $role): self
+    {
+        if (!$this->roles->contains($role)) {
+            $this->roles[] = $role;
+            $role->addLabel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRole(Role $role): self
+    {
+        if ($this->roles->contains($role)) {
+            $this->roles->removeElement($role);
+            $role->removeLabel($this);
+        }
+
+        return $this;
     }
 }
