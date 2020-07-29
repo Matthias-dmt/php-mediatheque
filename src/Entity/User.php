@@ -6,6 +6,8 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -13,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  * @ORM\DiscriminatorMap({"user" = "User", "employee" = "Employee", "member" = "Member"})
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -52,9 +54,12 @@ class User
      */
     private $participates;
 
-    public function __construct()
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->participates = new ArrayCollection();
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function getId(): ?int
@@ -81,7 +86,7 @@ class User
 
     public function setPassword(string $password): self
     {
-        $this->password = $password;
+        $this->password = $this->passwordEncoder->encodePassword($this, $password);
 
         return $this;
     }
