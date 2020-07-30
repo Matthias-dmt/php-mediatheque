@@ -58,7 +58,7 @@ class User implements UserInterface
     public $passwordEncoder;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Role::class, mappedBy="label")
+     * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="users", cascade={"persist"})
      */
     private $roles;
 
@@ -115,19 +115,18 @@ class User implements UserInterface
     public function getRoles()
     {
         $roles = $this->roles;
-
-        
-        
+ 
         $roleName = [];
-        foreach($roles as $role){
-            $roleName[] = $role->getName();
-        }
-
+        if($roles instanceof ArrayCollection) {
+            foreach($roles as $role){
+                $roleName[] = $role->getName();
+            }
+        };
+        
         // $roleName = array_map(function($item){return var_dump($item->name);},$roles);
         
 
         // guarantee every user at least has ROLE_USER
-        $roleName[] = 'ROLE_USER';
 
         return $roleName;
     }
@@ -225,11 +224,20 @@ class User implements UserInterface
 
     public function addRole(Role $role): self
     {
-        if (!$this->roles->contains($role)) {
-            $this->roles[] = $role;
-            $role->addLabel($this);
+        
+        if(is_null($this->roles)) 
+        {
+            $this->roles = new ArrayCollection();
+            var_dump(get_class($this->roles));
         }
-
+        if($this->roles instanceof ArrayCollection) {
+            if (!$this->roles->contains($role)) {
+                var_dump($role->getName());
+                $this->roles[] = $role;
+                var_dump(count($this->roles));
+                $role->addUser($this);
+            } 
+        }
         return $this;
     }
 
@@ -237,7 +245,7 @@ class User implements UserInterface
     {
         if ($this->roles->contains($role)) {
             $this->roles->removeElement($role);
-            $role->removeLabel($this);
+            $role->removeUser($this);
         }
 
         return $this;
