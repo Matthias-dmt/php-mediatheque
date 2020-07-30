@@ -25,14 +25,14 @@ class Role
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="roles")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="roles")
      */
-    private $label;
+    private $users;
 
     public function __construct()
     {
         $this->participates = new ArrayCollection();
-        $this->label = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -55,24 +55,24 @@ class Role
     /**
      * @return Collection|User[]
      */
-    public function getLabel(): Collection
+    public function getUser(): Collection
     {
-        return $this->label;
+        return $this->user;
     }
 
-    public function addLabel(User $label): self
+    public function addUser(User $user): self
     {
-        if (!$this->label->contains($label)) {
-            $this->label[] = $label;
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
         }
 
         return $this;
     }
 
-    public function removeLabel(User $label): self
+    public function removeUser(User $user): self
     {
-        if ($this->label->contains($label)) {
-            $this->label->removeElement($label);
+        if ($this->user->contains($user)) {
+            $this->user->removeElement($user);
         }
 
         return $this;

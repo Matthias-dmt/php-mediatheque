@@ -93,11 +93,9 @@ class MediathequeAuthenticator extends AbstractFormLoginAuthenticator implements
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            $user =$token->getUser();
 
             $roles = $token->getRoleNames();
-
-            
+                                  
             // return new RedirectResponse($targetPath);
 
             if(in_array('ROLE_ADMIN',$roles))

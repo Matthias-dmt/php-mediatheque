@@ -58,7 +58,7 @@ class User implements UserInterface
     public $passwordEncoder;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Role::class, mappedBy="label")
+     * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="users")
      */
     private $roles;
 
@@ -227,7 +227,7 @@ class User implements UserInterface
     {
         if (!$this->roles->contains($role)) {
             $this->roles[] = $role;
-            $role->addLabel($this);
+            $role->addUser($this);
         }
 
         return $this;
@@ -237,7 +237,7 @@ class User implements UserInterface
     {
         if ($this->roles->contains($role)) {
             $this->roles->removeElement($role);
-            $role->removeLabel($this);
+            $role->removeUser($this);
         }
 
         return $this;
