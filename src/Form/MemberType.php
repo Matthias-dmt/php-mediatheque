@@ -22,7 +22,7 @@ class MemberType extends AbstractType
             ->add('postalCode')
             ->add('city')
             ->add('adress')
-            ->add('membershipDate', DateType::class, ['html5' => true])
+            // ->add('membershipDate', DateType::class, ['html5' => true])
         ;
     }
 

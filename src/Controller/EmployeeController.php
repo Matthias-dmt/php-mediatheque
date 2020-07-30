@@ -13,7 +13,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * @Route("admin/employee")
+ * @Route("employee")
  */
 class EmployeeController extends AbstractController
 {

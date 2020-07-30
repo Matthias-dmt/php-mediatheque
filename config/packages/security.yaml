@@ -43,6 +43,8 @@ security:
     access_control:
     # require ROLE_ADMIN for /admin*
     - { path: '^/admin', roles: ROLE_ADMIN }
+    - { path: '^/employee', roles: ROLE_SUPERADMIN }
+
     # - { path: '^/user', roles: ROLE_USER}
 
     # # or require ROLE_ADMIN or IS_AUTHENTICATED_FULLY for /admin*
