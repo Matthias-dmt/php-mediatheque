@@ -58,11 +58,7 @@ class User implements UserInterface
     public $passwordEncoder;
 
     /**
-<<<<<<< HEAD
      * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="users", cascade={"persist"})
-=======
-     * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="users")
->>>>>>> 4325a45a8bde2b73727b58ea4b9395c1f0bf6b9b
      */
     private $roles;
 
@@ -121,11 +117,16 @@ class User implements UserInterface
         $roles = $this->roles;
  
         $roleName = [];
-        if($roles instanceof ArrayCollection) {
+        if($roles instanceof ArrayCollection){
             foreach($roles as $role){
                 $roleName[] = $role->getName();
             }
-        };
+        }
+        elseif($roles != null){
+            foreach($roles as $role){
+                $roleName[] = $role->getName();
+            }
+        }
         
         // $roleName = array_map(function($item){return var_dump($item->name);},$roles);
         
