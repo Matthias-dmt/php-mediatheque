@@ -98,7 +98,7 @@ class MediathequeAuthenticator extends AbstractFormLoginAuthenticator implements
                                   
             // return new RedirectResponse($targetPath);
 
-            if(in_array('ROLE_ADMIN',$roles))
+            if(in_array('ROLE_ADMIN',$roles) or in_array('ROLE_SUPERADMIN',$roles))
             return new RedirectResponse('admin');
 
             if(in_array('ROLE_USER',$roles))
