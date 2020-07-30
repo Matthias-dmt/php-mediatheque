@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * @Route("/borrowing")
+ * @Route("admin/borrowing")
  */
 class BorrowingController extends AbstractController
 {

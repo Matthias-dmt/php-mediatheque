@@ -17,7 +17,7 @@ class MailerController extends AbstractController
     }
 
     /**
-     * @Route("/relaunchEmail", name="relaunch_email")
+     * @Route("admin/relaunchEmail", name="relaunch_email")
      */
     public function sendRelaunchEmail()
     {

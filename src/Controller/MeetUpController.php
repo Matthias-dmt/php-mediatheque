@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 
 /**
- * @Route("/meetup")
+ * @Route("admin/meetup")
  */
 class MeetUpController extends AbstractController
 {

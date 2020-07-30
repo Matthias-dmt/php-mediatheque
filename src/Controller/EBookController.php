@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * @Route("/ebook")
+ * @Route("admin/ebook")
  */
 class EBookController extends AbstractController
 {

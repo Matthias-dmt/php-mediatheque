@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * @Route("/document")
+ * @Route("admin/document")
  */
 class DocumentController extends AbstractController
 {

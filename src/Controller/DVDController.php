@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * @Route("/dvd")
+ * @Route("admin/dvd")
  */
 class DVDController extends AbstractController
 {

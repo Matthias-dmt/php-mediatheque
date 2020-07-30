@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 /**
- * @Route("/member")
+ * @Route("admin/member")
  */
 class MemberController extends AbstractController
 {

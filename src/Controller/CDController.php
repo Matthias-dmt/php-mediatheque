@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * @Route("/cd")
+ * @Route("admin/cd")
  */
 class CDController extends AbstractController
 {
