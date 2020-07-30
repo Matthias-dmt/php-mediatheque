@@ -13,7 +13,7 @@ class EmployeeType extends AbstractType
     {
         $builder
             ->add('pseudo')
-            ->add('password')
+            ->add('password', PasswordType::class)
             ->add('email')
             ->add('firstName')
             ->add('lastName')
