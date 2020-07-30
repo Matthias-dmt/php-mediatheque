@@ -33,10 +33,21 @@ div.pagination span.current{
   }
 
   div.recommandation{
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
+    display: flex;
+    flex-direction: column;
+
   }
-  div.recommandation h5{
-    font-size: 80%;
-}  
+  div.recommandation a{
+    margin: 5px 5px 5px 5px;
+    font-size: 1.5rem;
+    padding: 5px;
+    width: 200px;
+    border: 1px solid black;
+    text-align: center;
+    transition: all 0.3s;
+}
+div.recommandation a:hover{
+    text-decoration: none;
+    color: rgb(60, 80, 102);
+    margin: 5px 5px 5px 15px;
+}
