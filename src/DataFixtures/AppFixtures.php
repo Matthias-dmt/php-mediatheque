@@ -50,22 +50,8 @@ class AppFixtures extends Fixture
         $authorRep = $this->manager->getRepository(Author::class);
         $employeeRep = $this->manager->getRepository(Employee::class);
         $memberRep = $this->manager->getRepository(Member::class);
-        $roleRep = $this->manager->getRepository(Role::class);
-
-        // Creation des roles
-        $role = new Role();
-        $role->setName('ROLE_ADMIN');
-        $manager->persist($role);
-
-        $role = new Role();
-        $role->setName('ROLE_USER');
-        $manager->persist($role);
-
-        $manager->flush();
 
 
-        
-        
         // on donne le nombre de donnée pour chaque table
         $nbBook         = 50;
         $nbEbook        = 50;
@@ -82,6 +68,20 @@ class AppFixtures extends Fixture
         $nbIsInvolvdIn  = 140;
         $nbMaintenance  = 40;
         $nbDocuments = $nbBook + $nbEbook + $nbCd + $nbJournal + $nbDvd;
+
+
+
+        // Creation des roles
+        $roles = ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_SUPERADMIN'];
+
+        foreach ($roles  as $r) {
+            $role = new Role();
+            $role->setName($r);
+            $manager->persist($role);
+
+        }
+        $manager->flush();
+
 
 
 
@@ -195,8 +195,6 @@ class AppFixtures extends Fixture
             $member->setMembershipDate($faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = null));
             $member->setEmail($faker->freeEmail);
             $manager->persist($member);
-
-
         }
 
 
@@ -221,7 +219,6 @@ class AppFixtures extends Fixture
             $employee->setPassword($pass);
             $employee->setEmail($faker->freeEmail);
             $manager->persist($employee);
-
         }
         $manager->flush();
 
@@ -236,8 +233,8 @@ class AppFixtures extends Fixture
         $lastUser  = ($userRep->findOneBy([], ['id' => 'desc']))->getId();
 
 
-            
-            $arrayTest = [];
+
+        $arrayTest = [];
         // on créé des meet up
         for ($i = 0; $i < $nbMeetUp; $i++) {
             $meetUp = new MeetUp();
@@ -245,12 +242,12 @@ class AppFixtures extends Fixture
             $meetUp->setEmployee($employeeRep->find($faker->numberBetween($min = $firstEmploy, $max = $lastEmploy)));
 
             $j = false;
-            while($j == false){
+            while ($j == false) {
                 $fakerAuthor = $faker->numberBetween($min = $firstAuthor, $max = $lastAuthor);
-                
-                if($authorRep->findBy(['id'=> $fakerAuthor]) && !in_array($fakerAuthor, $arrayTest)){
-                $arrayTest[] = $fakerAuthor;
-                $j = true;
+
+                if ($authorRep->findBy(['id' => $fakerAuthor]) && !in_array($fakerAuthor, $arrayTest)) {
+                    $arrayTest[] = $fakerAuthor;
+                    $j = true;
                 }
             }
             $meetUp->setAuthor($authorRep->find($fakerAuthor));
@@ -338,6 +335,5 @@ class AppFixtures extends Fixture
             $manager->persist($maintenance);
         }
         $manager->flush();
-        
     }
 }

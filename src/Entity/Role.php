@@ -65,7 +65,6 @@ class Role
         var_dump('salit');
         if (!$this->users->contains($users)) {
             $this->users[] = $users;
-            var_dump(count($this->users));
         }
 
         return $this;

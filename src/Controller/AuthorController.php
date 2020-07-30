@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * @Route("/author")
+ * @Route("admin/author")
  */
 class AuthorController extends AbstractController
 {
