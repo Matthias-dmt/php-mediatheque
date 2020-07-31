@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\InheritanceType("SINGLE_TABLE")
@@ -117,12 +116,16 @@ class User implements UserInterface
         $roles = $this->roles;
  
         $roleName = [];
-        if($roles instanceof ArrayCollection or $roles[0] instanceof Role){
+        if($roles instanceof ArrayCollection or isset($roles)){
+            
             foreach($roles as $role){
                 $roleName[] = $role->getName();
             }
+
         }
-        
+
+
+      
         // guarantee every user at least has ROLE_USER
 
         return $roleName;
@@ -225,7 +228,6 @@ class User implements UserInterface
         if(is_null($this->roles)) 
         {
             $this->roles = new ArrayCollection();
-            var_dump(get_class($this->roles));
         }
         if($this->roles instanceof ArrayCollection) {
             if (!$this->roles->contains($role)) {
