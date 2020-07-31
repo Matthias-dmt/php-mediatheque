@@ -16,6 +16,10 @@ class Recommandation extends AbstractController
 
         // $tabdoc = [];
 
+
+        //nombre de recommandation à afficher
+        $nbReco = 5;
+
         //liste des membres qui ont emprunté le document "$doc"
         $members = $this->getDoctrine()->getRepository(Borrowing::class)->membersForOneDoc($doc->getId());
         
@@ -40,11 +44,13 @@ class Recommandation extends AbstractController
                     // je créé mon tableau de retour, qui possèdera seulement les objets documents
                     $tabdoc[] = $document[0]->getDocument();
                 }
-                if(isset($tabdoc[4])){return $tabdoc;}
+
+                    $tabdoc = array_unique($tabdoc);
             }
         }
-
-
-        return $tabdoc;
+            if(isset($tabdoc[$nbReco]))shuffle($tabdoc);
+            
+            
+            return array_slice($tabdoc, 0, $nbReco);
     }
 }
