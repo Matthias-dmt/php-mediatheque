@@ -117,20 +117,12 @@ class User implements UserInterface
         $roles = $this->roles;
  
         $roleName = [];
-        if($roles instanceof ArrayCollection){
-            foreach($roles as $role){
-                $roleName[] = $role->getName();
-            }
-        }
-        elseif($roles != null){
+        if($roles instanceof ArrayCollection or $roles[0] instanceof Role){
             foreach($roles as $role){
                 $roleName[] = $role->getName();
             }
         }
         
-        // $roleName = array_map(function($item){return var_dump($item->name);},$roles);
-        
-
         // guarantee every user at least has ROLE_USER
 
         return $roleName;
