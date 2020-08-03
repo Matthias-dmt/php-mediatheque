@@ -34,3 +34,7 @@ services:
     # please note that last definitions always *replace* previous ones
     cebe\markdown\Markdown: ~
 
+    App\EventListener\ControllerListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, priority: 1}
+

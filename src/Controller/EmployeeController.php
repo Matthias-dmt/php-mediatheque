@@ -37,6 +37,12 @@ class EmployeeController extends AbstractController
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+
+        if(!$this->isGranted("ROLE_SUPERADMIN"))
+        {
+            return $this->redirectToRoute('employee_index');
+        }
+
         $employee = new Employee($passwordEncoder);
         $form = $this->createForm(EmployeeType::class, $employee);
         $form->handleRequest($request);
@@ -71,6 +77,11 @@ class EmployeeController extends AbstractController
      */
     public function edit(Request $request, Employee $employee): Response
     {
+        if(!$this->isGranted("ROLE_SUPERADMIN"))
+        {
+            return $this->redirectToRoute('employee_index');
+        }
+
         $form = $this->createForm(EmployeeType::class, $employee);
         $form->handleRequest($request);
 
