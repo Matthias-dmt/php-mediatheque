@@ -36,5 +36,5 @@ services:
 
     App\EventListener\ControllerListener:
         tags:
-            - { name: kernel.event_listener, event: kernel.controller, priority: 1}
+            - { name: kernel.event_listener, event: kernel.request, priority: 1000}
 
